@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://qnhcm4apk3oj"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_icjww"]
+[ext_resource type="Texture2D" uid="uid://styra6t08jt7" path="res://geral/Mushroom with VFX/Mushroom-Idle.png" id="2_s0l1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe2t6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2pho"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dhkw"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msuo8"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcn5k"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(240, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owiq0"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(320, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7uew"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(400, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d8ct"]
+atlas = ExtResource("2_s0l1a")
+region = Rect2(480, 0, 80, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_saiet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2pho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dhkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msuo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcn5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owiq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7uew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d8ct")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31a4r"]
+radius = 96.0833
+
+[node name="nnsei" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_icjww")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qe2t6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_saiet")
+autoplay = "default"
+
+[node name="detection_area" type="Area2D" parent="."]
+collision_layer = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_31a4r")
+debug_color = Color(0.164706, 0.643137, 0, 0.419608)
+
+[connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="detection_area" to="." method="_on_detection_area_area_exited"]
