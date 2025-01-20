@@ -23,21 +23,16 @@ func _physics_process(delta):
 			chase_player()
 		"hurt", "dying":
 			velocity = Vector2.ZERO
-			
 	move_and_slide()
 
 func check_for_player():
-	
-	print("oi")
-	if ray_cast.is_colliding():
-		print("colidi")
-		var collider = ray_cast.get_collider()
-		if collider.name == "player":
-			print("encontrei o player")
-			player = collider
-			state = "chase"
-			
-
+	for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider.name == "player":
+				player = collider
+				state = "chase"
+				return  # Sai da função assim que encontrar o jogador
 func chase_player():
 	if player:
 		var direction = (player.position - position).normalized()

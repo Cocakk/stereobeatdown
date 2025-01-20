@@ -286,7 +286,7 @@ height = 14.0
 size = Vector2(20, 26)
 
 [node name="Mushroom" type="CharacterBody2D"]
-collision_mask = 16
+collision_mask = 17
 script = ExtResource("1_cxxsu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -318,11 +318,11 @@ target_position = Vector2(-1000, 0)
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 position = Vector2(6, -12)
-target_position = Vector2(-1008, -81)
+target_position = Vector2(-1012, -168)
 
 [node name="RayCast2D3" type="RayCast2D" parent="."]
 position = Vector2(2, 7)
-target_position = Vector2(-990, 81)
+target_position = Vector2(-956, 291)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_animation_finished"]

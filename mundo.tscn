@@ -10,7 +10,7 @@ y_sort_enabled = true
 position = Vector2(172, 112)
 
 [node name="Mushroom" parent="." instance=ExtResource("2_48byf")]
-position = Vector2(-431, 191)
+position = Vector2(-278, 41)
 
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]
 y_sort_enabled = true
