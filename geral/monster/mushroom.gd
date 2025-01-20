@@ -1,17 +1,26 @@
 extends CharacterBody2D
+
+@export var face_left: bool = true
 @onready var anini = $AnimatedSprite2D
+@onready var ray_cast = $RayCast2D
+@onready var ray_cast_2d_2 = $RayCast2D2
+@onready var ray_cast_2d_3 = $RayCast2D3
 
 var speed = 80
 var player = null
 var damagetaken = 0
 var state = "idle"
-@onready var ray_cast = $RayCast2D
-@onready var ray_cast_2d_2 = $RayCast2D2
-@onready var ray_cast_2d_3 = $RayCast2D3
-
+var detection_radius = 25
 
 func _ready():
-	pass
+	# Configuração inicial baseada na direção
+	set_direction(face_left)
+
+func set_direction(is_left: bool):
+	var direction = -1 if is_left else 1
+	anini.scale.x = direction*-1
+	for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
+		ray.target_position.x = abs(ray.target_position.x) * direction
 
 func _physics_process(delta):
 	match state:
@@ -23,30 +32,54 @@ func _physics_process(delta):
 			chase_player()
 		"hurt", "dying":
 			velocity = Vector2.ZERO
+	
 	move_and_slide()
 
 func check_for_player():
+	# Verificação de proximidade
+	if player and position.distance_to(player.position) <= detection_radius:
+		state = "chase"
+		return
+
 	for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
 		if ray.is_colliding():
 			var collider = ray.get_collider()
 			if collider.name == "player":
 				player = collider
 				state = "chase"
-				return  # Sai da função assim que encontrar o jogador
+				return
+
 func chase_player():
 	if player:
 		var direction = (player.position - position).normalized()
-		velocity = direction * speed
-		anini.play("run")
-		anini.scale.x = -1 if direction.x > 0 else 1
-		ray_cast.target_position = direction * 1000
+		var distance = position.distance_to(player.position)
 		
-		if not ray_cast.is_colliding() or ray_cast.get_collider() != player:
-			state = "idle"
-			player = null
+		if distance > detection_radius:
+			velocity = direction * speed
+			anini.play("run")
+			set_direction(direction.x < 0)  # Atualiza a direção baseada no movimento
+		else:
+			velocity = Vector2.ZERO
+			anini.play("idle")
 		
-
-
+		# Atualiza a direção dos raycasts para apontar para o jogador
+		var to_player = player.global_position - global_position
+		for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
+			ray.target_position = to_player.normalized() * 1000
+		
+		# Verifica se o jogador ainda está visível ou próximo
+		if distance > detection_radius:
+			var player_visible = false
+			for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
+				if ray.is_colliding() and ray.get_collider() == player:
+					player_visible = true
+					break
+			
+			if not player_visible:
+				state = "idle"
+				player = null
+	else:
+		state = "idle"
 
 
 func _on_animated_sprite_2d_animation_finished():
