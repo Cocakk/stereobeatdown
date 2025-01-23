@@ -5,9 +5,9 @@ extends CharacterBody2D
 @onready var ray_cast = $RayCast2D
 @onready var ray_cast_2d_2 = $RayCast2D2
 @onready var ray_cast_2d_3 = $RayCast2D3
-
+@onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 var speed = 80
-var player = null
+@export var player : Node2D
 var damagetaken = 0
 var state = "idle"
 var detection_radius = 25
@@ -22,7 +22,7 @@ func set_direction(is_left: bool):
 	for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
 		ray.target_position.x = abs(ray.target_position.x) * direction
 
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	match state:
 		"idle":
 			velocity = Vector2.ZERO
@@ -50,8 +50,11 @@ func check_for_player():
 				return
 
 func chase_player():
+	if not player or not is_instance_valid(player):
+		state = "idle"
+		return
 	if player:
-		var direction = (player.position - position).normalized()
+		var direction = to_local(nav_agent.get_next_path_position()).normalized()
 		var distance = position.distance_to(player.position)
 		
 		if distance > detection_radius:
@@ -77,9 +80,15 @@ func chase_player():
 			
 			if not player_visible:
 				state = "idle"
-				player = null
+				
 	else:
 		state = "idle"
+
+
+
+func makepath()-> void:
+	nav_agent.target_position = player.global_position
+	
 
 
 func _on_animated_sprite_2d_animation_finished():
@@ -108,3 +117,8 @@ func _on_prox_body_entered(body):
 func _on_prox_body_exited(body):
 	if state != "dying" and body == player:  # Adicionada verificação
 		state = "chase"
+
+
+func _on_timer_timeout():
+	makepath()
+

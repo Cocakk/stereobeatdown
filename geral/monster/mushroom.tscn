@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://oo8jw0ebwcyc" path="res://geral/Mushroom without VFX/Mushroom-Hit.png" id="3_2wt6x"]
 [ext_resource type="Texture2D" uid="uid://cjcfa2gc65c52" path="res://geral/Mushroom without VFX/Mushroom-Run.png" id="4_7cd0g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0edq"]
-size = Vector2(14, 29)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ypd24"]
+radius = 7.0
+height = 25.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxe40"]
 atlas = ExtResource("2_4duoy")
@@ -287,11 +288,13 @@ size = Vector2(20, 26)
 
 [node name="Mushroom" type="CharacterBody2D"]
 collision_mask = 16
+motion_mode = 1
+wall_min_slide_angle = 2.98451
 script = ExtResource("1_cxxsu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -4.5)
-shape = SubResource("RectangleShape2D_u0edq")
+shape = SubResource("CapsuleShape2D_ypd24")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -24)
@@ -324,8 +327,16 @@ target_position = Vector2(-1012, -168)
 position = Vector2(2, 7)
 target_position = Vector2(-956, 291)
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="Damaged" from="HitBox" to="." method="_on_hit_box_damaged"]
 [connection signal="body_entered" from="prox" to="." method="_on_prox_body_entered"]
 [connection signal="body_exited" from="prox" to="." method="_on_prox_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
