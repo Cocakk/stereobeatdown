@@ -329,7 +329,8 @@ target_position = Vector2(-956, 291)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
-avoidance_layers = 0
+avoidance_enabled = true
+avoidance_layers = 20
 debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
