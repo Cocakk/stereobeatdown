@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://3gwlceicy4du"]
+[gd_scene load_steps=5 format=3 uid="uid://3gwlceicy4du"]
 
 [ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="1_310lh"]
+[ext_resource type="Texture2D" uid="uid://bprmn0dl7a3kv" path="res://ui/487c9124268a9da9d6bc45e3c4a6dc2d.jpg" id="1_w7uh3"]
 [ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="2_tkfth"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b8ire"]
@@ -9,39 +10,50 @@ font_size = 56
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="texture" type="TextureRect"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 70
+texture = ExtResource("1_w7uh3")
+expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 15
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 75
 
-[node name="Button" parent="VBoxContainer" instance=ExtResource("2_tkfth")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Jogar"
-
-[node name="Button2" parent="VBoxContainer" instance=ExtResource("2_tkfth")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Opções"
-
-[node name="Button3" parent="VBoxContainer" instance=ExtResource("2_tkfth")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Sair"
-
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="MarginContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "STEREO BEATDOWN"
 label_settings = SubResource("LabelSettings_b8ire")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Button" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_tkfth")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Jogar"
+
+[node name="Button2" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_tkfth")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Opções"
+
+[node name="Button3" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_tkfth")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Sair"
