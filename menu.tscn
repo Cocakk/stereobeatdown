@@ -1,14 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://3gwlceicy4du"]
+[gd_scene load_steps=12 format=3 uid="uid://3gwlceicy4du"]
 
 [ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="1_310lh"]
 [ext_resource type="Texture2D" uid="uid://d14rtb4v3ivpu" path="res://ui/7.png" id="1_ij126"]
 [ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="2_tkfth"]
+[ext_resource type="Shader" path="res://neve.gdshader" id="3_hs844"]
 [ext_resource type="Texture2D" uid="uid://d8ml08npcwo" path="res://ui/animationbg.png" id="4_1l0wa"]
+[ext_resource type="Shader" path="res://neve2.gdshader" id="5_5k173"]
 [ext_resource type="Texture2D" uid="uid://dw3i1fpj2mvm0" path="res://ui/city 8/5.png" id="5_sy010"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_piafl"]
+shader = ExtResource("3_hs844")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqa4c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o8owc"]
+shader = ExtResource("5_5k173")
 
 [sub_resource type="LabelSettings" id="LabelSettings_b8ire"]
 font = ExtResource("1_310lh")
 font_size = 56
+font_color = Color(0.858824, 0, 0.890196, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
@@ -22,7 +33,9 @@ grow_vertical = 2
 texture = ExtResource("1_ij126")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="neve2" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_piafl")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +44,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_1l0wa")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="prediobg" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_tqa4c")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,10 +55,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_sy010")
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="neve" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_o8owc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_1l0wa")
+flip_v = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -59,7 +81,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-text = "Titulo Mto Phoda"
+text = "Stereo Beatdown"
 label_settings = SubResource("LabelSettings_b8ire")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
