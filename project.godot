@@ -24,6 +24,13 @@ window/size/window_height_override=550
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[file_customization]
+
+folder_colors={
+"res://ui/": "purple",
+"res://ui/menusections/": "red"
+}
+
 [input]
 
 up={

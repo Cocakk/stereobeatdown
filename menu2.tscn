@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=3 uid="uid://pwc1ndhahk5b"]
+
+[ext_resource type="Script" path="res://menu2.gd" id="1_0jbyi"]
+[ext_resource type="Texture2D" uid="uid://d14rtb4v3ivpu" path="res://ui/7.png" id="1_cs6mv"]
+[ext_resource type="Shader" path="res://neve.gdshader" id="2_87240"]
+[ext_resource type="Texture2D" uid="uid://d8ml08npcwo" path="res://ui/animationbg.png" id="3_d2sl2"]
+[ext_resource type="Texture2D" uid="uid://dw3i1fpj2mvm0" path="res://ui/city 8/5.png" id="4_o5lx2"]
+[ext_resource type="Shader" path="res://neve2.gdshader" id="5_ibmo2"]
+[ext_resource type="PackedScene" uid="uid://bu4ujnev02qmv" path="res://ui/menucontainer.tscn" id="6_cswjq"]
+[ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="7_trx6h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_duvwy"]
+shader = ExtResource("2_87240")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pi845"]
+shader = ExtResource("5_ibmo2")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0jbyi")
+
+[node name="texture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cs6mv")
+expand_mode = 2
+
+[node name="neve" type="TextureRect" parent="texture"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_duvwy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_d2sl2")
+
+[node name="predio" type="TextureRect" parent="texture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_o5lx2")
+
+[node name="neve2" type="TextureRect" parent="texture"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_pi845")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_d2sl2")
+flip_v = true
+
+[node name="MarginContainer" parent="texture" instance=ExtResource("6_cswjq")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1280.0
+offset_bottom = 640.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="texture/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Button" parent="texture/MarginContainer/VBoxContainer" instance=ExtResource("7_trx6h")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Save"
+
+[node name="Button2" parent="texture/MarginContainer/VBoxContainer" instance=ExtResource("7_trx6h")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Load"
+
+[node name="Button3" parent="texture/MarginContainer/VBoxContainer" instance=ExtResource("7_trx6h")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Exit"
