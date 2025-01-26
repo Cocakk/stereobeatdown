@@ -21,7 +21,8 @@ window/size/viewport_width=1280
 window/size/viewport_height=640
 window/size/window_width_override=1080
 window/size/window_height_override=550
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -70,3 +71,4 @@ attack={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

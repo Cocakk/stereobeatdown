@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddaohxnjfgr24"]
+
+[ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="1_isppb"]
+
+[node name="Button" type="Button"]
+offset_right = 89.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("1_isppb")
+theme_override_font_sizes/font_size = 18
+text = "Play"
