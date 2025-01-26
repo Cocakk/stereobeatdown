@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://cffu4vkavxnxb"]
+
+[ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="1_5d3fp"]
+[ext_resource type="Script" path="res://saveandload.gd" id="1_dxw2y"]
+
+[node name="saveandload" type="CanvasLayer" node_paths=PackedStringArray("player_name", "color")]
+script = ExtResource("1_dxw2y")
+player_name = NodePath("Control/nome/LineEdit")
+color = NodePath("Control/cor/ColorPickerButton")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="titulo" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.5
+offset_top = 108.0
+offset_right = 66.5
+offset_bottom = 131.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control/titulo"]
+layout_mode = 2
+text = "Stereo Beatdown"
+
+[node name="nome" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -15.0
+offset_right = 168.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="Control/nome"]
+layout_mode = 2
+size_flags_horizontal = 4
+placeholder_text = "Player"
+max_length = 100
+
+[node name="cor" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -264.0
+offset_right = 20.0
+offset_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Control/cor"]
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Button" parent="." instance=ExtResource("1_5d3fp")]
+offset_left = 140.0
+offset_top = 311.0
+offset_right = 229.0
+offset_bottom = 345.0
+text = "save"
+
+[node name="Button2" parent="." instance=ExtResource("1_5d3fp")]
+offset_left = 135.0
+offset_top = 383.0
+offset_right = 224.0
+offset_bottom = 417.0
+text = "load"
+
+[connection signal="pressed" from="Button" to="." method="_save"]
+[connection signal="pressed" from="Button2" to="." method="_load"]

@@ -9,7 +9,20 @@ script = ExtResource("1_5a30s")
 
 [node name="Control" parent="." instance=ExtResource("1_gdvrm")]
 
+[node name="VBoxContainer" parent="Control/texture/MarginContainer" index="1"]
+theme_override_constants/separation = 15
+
+[node name="Button" parent="Control/texture/MarginContainer/VBoxContainer" index="0"]
+text = "Continuar"
+
+[node name="Button2" parent="Control/texture/MarginContainer/VBoxContainer" index="1"]
+text = "Novo jogo"
+
+[node name="Button3" parent="Control/texture/MarginContainer/VBoxContainer" index="2"]
+text = "Sair"
+
 [node name="texture" parent="." instance=ExtResource("2_tokal")]
+visible = false
 
 [connection signal="pressed" from="Control/texture/MarginContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="texture/MarginContainer/VBoxContainer/Jogar" to="." method="_on_jogar_pressed"]
