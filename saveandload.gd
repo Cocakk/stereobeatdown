@@ -2,13 +2,14 @@ extends CanvasLayer
 @export var player_name : LineEdit
 @export var color : ColorPickerButton
 var key = "beterruba"
-
+func _ready():
+	var scene_path = get_tree().current_scene.scene_file_path
+	print(scene_path)
 
 func _save():
 	var config = ConfigFile.new()
-	config.set_value("Settings", "Name", player_name.text)
-	config.set_value("Settings", "Color", color.color)
-	config.save_encrypted_pass("user://settings.cfg", key)
+	config.set_value("Scenes", "Name", get_tree().current_scene.scene_file_path)
+	config.save_encrypted_pass("res://save/scenes.cfg", key)
 	print("salvo")
 
 
@@ -21,3 +22,6 @@ func _load():
 		color.color = config.get_value("Settings","Color")
 	else:
 		printerr("Tem parada errada")
+
+
+
