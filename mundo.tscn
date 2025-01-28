@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b46g01mgq4s15"]
+[gd_scene load_steps=7 format=3 uid="uid://b46g01mgq4s15"]
 
 [ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="1_g0ifi"]
 [ext_resource type="PackedScene" uid="uid://cma7r3qh6ci2" path="res://geral/monster/mushroom.tscn" id="2_48byf"]
 [ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="2_e0rww"]
 [ext_resource type="PackedScene" uid="uid://bx7gn5dhtdya6" path="res://props/plant/plant.tscn" id="3_oqgg8"]
+[ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="5_ybsgh"]
+[ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="6_lxeoh"]
 
 [node name="mundo" type="Node2D"]
 y_sort_enabled = true
@@ -37,3 +39,13 @@ layer_2/tile_data = PackedInt32Array(-393207, 65538, 7, -393208, 131074, 7, -393
 light_mask = 3
 visibility_layer = 3
 position = Vector2(257, 116)
+
+[node name="savepoint" parent="." instance=ExtResource("5_ybsgh")]
+position = Vector2(274, -30)
+
+[node name="portal" parent="savepoint" instance=ExtResource("6_lxeoh")]
+position = Vector2(-544.667, -53.3333)
+scale = Vector2(0.5, 0.5)
+next_scene = "res://mundo_2.tscn"
+
+[editable path="savepoint"]

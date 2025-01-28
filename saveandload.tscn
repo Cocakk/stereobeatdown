@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cffu4vkavxnxb"]
+[gd_scene load_steps=5 format=3 uid="uid://cffu4vkavxnxb"]
 
 [ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="1_5d3fp"]
 [ext_resource type="Script" path="res://saveandload.gd" id="1_dxw2y"]
+[ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="2_1vbag"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ho88"]
+font = ExtResource("2_1vbag")
+font_size = 27
 
 [node name="saveandload" type="CanvasLayer" node_paths=PackedStringArray("player_name", "color")]
 script = ExtResource("1_dxw2y")
@@ -30,6 +35,7 @@ grow_horizontal = 2
 [node name="Label" type="Label" parent="Control/titulo"]
 layout_mode = 2
 text = "Stereo Beatdown"
+label_settings = SubResource("LabelSettings_5ho88")
 
 [node name="nome" type="PanelContainer" parent="Control"]
 layout_mode = 1
