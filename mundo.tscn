@@ -19,7 +19,6 @@ player = NodePath("../player")
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]
 y_sort_enabled = true
 position = Vector2(588, 104)
-collision_mask = 272
 
 [node name="SprTile01" parent="." instance=ExtResource("2_e0rww")]
 position = Vector2(0, 12)
