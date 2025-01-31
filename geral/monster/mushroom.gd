@@ -18,7 +18,7 @@ func _ready():
 
 func set_direction(is_left: bool):
 	var direction = -1 if is_left else 1
-	anini.scale.x = direction*-1
+	anini.scale.x = direction
 	for ray in [ray_cast, ray_cast_2d_2, ray_cast_2d_3]:
 		ray.target_position.x = abs(ray.target_position.x) * direction
 

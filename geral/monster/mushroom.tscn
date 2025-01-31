@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bg0vu4eovx0rv" path="res://geral/Mushroom without VFX/Mushroom-Idle.png" id="2_q1217"]
 [ext_resource type="PackedScene" uid="uid://bc6p88bic5l5c" path="res://geral/hitbox/hit_box.tscn" id="3_1p1it"]
 [ext_resource type="Texture2D" uid="uid://oo8jw0ebwcyc" path="res://geral/Mushroom without VFX/Mushroom-Hit.png" id="3_2wt6x"]
-[ext_resource type="Texture2D" uid="uid://cjcfa2gc65c52" path="res://geral/Mushroom without VFX/Mushroom-Run.png" id="4_7cd0g"]
+[ext_resource type="Texture2D" uid="uid://bwu54krl5f6ke" path="res://geral/andando(1).png" id="5_gusmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8gub"]
 radius = 6.08276
@@ -118,37 +118,37 @@ region = Rect2(400, 0, 80, 64)
 atlas = ExtResource("2_q1217")
 region = Rect2(480, 0, 80, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_854li"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(0, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ke8j"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(64, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wuusf"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(80, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_es3ea"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(128, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vegtt"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(160, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwy76"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(192, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cuqe3"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(240, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqyyj"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(256, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4iqqs"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(320, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2r37"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(256, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8qwx3"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(400, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m0uk"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(192, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_67w21"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(480, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_w87r1"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(128, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vwt05"]
-atlas = ExtResource("4_7cd0g")
-region = Rect2(560, 0, 80, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5wj2"]
+atlas = ExtResource("5_gusmy")
+region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m03vw"]
 animations = [{
@@ -250,28 +250,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_854li")
+"texture": SubResource("AtlasTexture_3ke8j")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wuusf")
+"texture": SubResource("AtlasTexture_es3ea")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vegtt")
+"texture": SubResource("AtlasTexture_iwy76")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cuqe3")
+"texture": SubResource("AtlasTexture_vqyyj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4iqqs")
+"texture": SubResource("AtlasTexture_e2r37")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8qwx3")
+"texture": SubResource("AtlasTexture_5m0uk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_67w21")
+"texture": SubResource("AtlasTexture_w87r1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vwt05")
+"texture": SubResource("AtlasTexture_p5wj2")
 }],
 "loop": true,
 "name": &"run",
@@ -297,10 +297,11 @@ position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_q8gub")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -24)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_m03vw")
-animation = &"damage"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.743951
 
 [node name="HitBox" parent="." instance=ExtResource("3_1p1it")]
 
