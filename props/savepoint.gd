@@ -1,11 +1,13 @@
 extends StaticBody2D
 @onready var label = $Label
 var player_in_area = false
+@onready var anim = $AnimationPlayer
+
 var key = "beterruba"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	label.visible = false
-	
+	label.text = "Deseja salvar o seu progresso?"
 	pass # Replace with function body.
 
 
@@ -26,6 +28,7 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body.name == "player":
 		label.visible = true
+		anim.play("show")
 		player_in_area = true
 		
 	pass # Replace with function body.

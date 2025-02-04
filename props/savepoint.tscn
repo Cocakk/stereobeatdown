@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cowxuexkcbhm7"]
+[gd_scene load_steps=10 format=3 uid="uid://cowxuexkcbhm7"]
 
 [ext_resource type="Script" path="res://props/savepoint.gd" id="1_mm7cd"]
 [ext_resource type="FontFile" uid="uid://dja4lqa018ujs" path="res://fonts/Texto/falas/Tiny5-Regular.ttf" id="2_x1y6t"]
 [ext_resource type="Texture2D" uid="uid://c5mvjxnmsk6pb" path="res://tilemaps/CP_V1.1.0_nyknck/CP_V1.0.4_nyknck/CP_V1.0.4.png" id="3_lxf1u"]
-[ext_resource type="Script" path="res://props/Label.gd" id="3_viv2l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b7qvw"]
 radius = 26.88
@@ -18,6 +17,26 @@ region = Rect2(496, 176, 24, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2iu1s"]
 size = Vector2(25, 33)
+
+[sub_resource type="Animation" id="Animation_4oj17"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 50]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7g1eu"]
+_data = {
+"show": SubResource("Animation_4oj17")
+}
 
 [node name="savepoint" type="StaticBody2D"]
 scale = Vector2(1.5, 1.5)
@@ -40,7 +59,7 @@ offset_bottom = 3.0
 size_flags_vertical = 8
 text = "Deseja salvar seu progresso?"
 label_settings = SubResource("LabelSettings_4giv5")
-script = ExtResource("3_viv2l")
+visible_characters = 28
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_3jgyt")
@@ -50,6 +69,11 @@ position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_2iu1s")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7g1eu")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
