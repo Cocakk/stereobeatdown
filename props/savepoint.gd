@@ -2,6 +2,7 @@ extends StaticBody2D
 @onready var label = $Label
 var player_in_area = false
 @onready var anim = $AnimationPlayer
+@onready var audio = $AudioStreamPlayer2D
 
 var key = "beterruba"
 # Called when the node enters the scene tree for the first time.
@@ -30,11 +31,12 @@ func _on_area_2d_body_entered(body):
 		label.visible = true
 		anim.play("show")
 		player_in_area = true
-		
+		audio.play()
 	pass # Replace with function body.
 
 
 func _on_area_2d_body_exited(body):
 	label.visible = false
 	player_in_area = false
+	audio.stop()
 	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cma7r3qh6ci2"]
+[gd_scene load_steps=44 format=3 uid="uid://cma7r3qh6ci2"]
 
 [ext_resource type="Script" path="res://geral/monster/mushroom.gd" id="1_cxxsu"]
 [ext_resource type="Texture2D" uid="uid://dttakwpublq2e" path="res://geral/Mushroom without VFX/Mushroom-Die.png" id="2_4duoy"]
@@ -272,8 +272,10 @@ animations = [{
 radius = 5.0
 height = 14.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mosaw"]
-size = Vector2(20, 26)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a45sl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xghpc"]
+radius = 109.61
 
 [node name="Mushroom" type="CharacterBody2D"]
 collision_mask = 16
@@ -304,29 +306,24 @@ collision_mask = 4
 
 [node name="proximo" type="CollisionShape2D" parent="prox"]
 position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_mosaw")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-1, -3)
-target_position = Vector2(-1000, 0)
-
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-position = Vector2(6, -12)
-target_position = Vector2(-1012, -168)
-
-[node name="RayCast2D3" type="RayCast2D" parent="."]
-position = Vector2(2, 7)
-target_position = Vector2(-956, 291)
+shape = SubResource("RectangleShape2D_a45sl")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
-avoidance_layers = 20
+radius = 135.0
+avoidance_layers = 21
 debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xghpc")
+debug_color = Color(0.886275, 0.298039, 0.380392, 0.419608)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_animation_finished"]
