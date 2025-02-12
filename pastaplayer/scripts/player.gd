@@ -26,7 +26,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	
-	
+
 	direction = Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
@@ -78,7 +78,8 @@ func _on_timer_timeout():
 	timer.stop()
 	pass # Replace with function body.
 
-
+##substituir o sinal a baixo pelo sinal emitido pelo inimigo quando morre (não esqueça.
 func _on_attack_reload():
-	timer.start() ##inserir um reload de timer, isso é só um teste btw...
+	timer.start()
+	 ##inserir um reload de timer, isso é só um teste btw...
 	pass # Replace with function body.

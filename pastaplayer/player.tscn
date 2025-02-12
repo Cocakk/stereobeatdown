@@ -551,5 +551,7 @@ script = ExtResource("9_ukgc4")
 wait_time = 3.285
 autostart = true
 
+[node name="Line2D" type="Line2D" parent="."]
+
 [connection signal="reload" from="StateMachine/Attack" to="." method="_on_attack_reload"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
