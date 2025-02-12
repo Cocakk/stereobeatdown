@@ -30,7 +30,7 @@ player = NodePath("../player")
 
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]
 y_sort_enabled = true
-position = Vector2(812, 158)
+position = Vector2(7, 146)
 
 [node name="sugareffect" parent="player" instance=ExtResource("6_on305")]
 z_index = 2
@@ -38,11 +38,12 @@ anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -497.0
-offset_top = 97.0
-offset_right = 502.0
-offset_bottom = 127.0
+offset_left = -238.0
+offset_top = 86.0
+offset_right = 761.0
+offset_bottom = 116.0
 grow_vertical = 0
+scale = Vector2(0.480001, 1)
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
@@ -50,9 +51,10 @@ size_flags_vertical = 8
 position = Vector2(396, 96)
 
 [node name="portal" parent="." instance=ExtResource("6_lxeoh")]
+visible = false
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(-543, -110)
+position = Vector2(736, 138)
 scale = Vector2(0.75, 0.75)
 next_scene = "res://mundo_2.tscn"
 
