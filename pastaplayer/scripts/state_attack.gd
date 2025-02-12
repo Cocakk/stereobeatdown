@@ -14,7 +14,7 @@ class_name stateAttack extends State
 @export var dash_speed : float = 300.0
 var dash_duration : float = 0.2
 var dash_timer : float = 0.0
-
+signal reload
 var attacking : bool = false
 
 #o que acontece quando o player entra nesse estado?
@@ -53,6 +53,7 @@ func Process(_delta : float) -> State:
 	if attacking:
 		if dash_timer < dash_duration:
 			dash_timer += _delta
+			emit_signal("reload")
 		else:
 			player.velocity = player.velocity.move_toward(Vector2.ZERO, decelerate_speed * _delta)
 	else:

@@ -9,6 +9,9 @@ const DIR_4 = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
+signal vencivel
+var invencivel = true 
+@onready var timer = $Timer
 
 
 signal DirectionChanged(new_direction : Vector2)
@@ -66,3 +69,16 @@ func AnimDirection () -> String:
 		return ("side")
 		
 
+
+
+func _on_timer_timeout():
+	emit_signal("vencivel")
+	invencivel = false
+	print("o timer funciona perfeitamente") 
+	timer.stop()
+	pass # Replace with function body.
+
+
+func _on_attack_reload():
+	timer.start() ##inserir um reload de timer, isso é só um teste btw...
+	pass # Replace with function body.

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var anini = $AnimatedSprite2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var detection_area = $Area2D
+@onready var detectionshape = $Area2D/CollisionShape2D
 
 var speed = 80
 @export var player : Node2D
@@ -34,6 +35,7 @@ func _physics_process(delta: float) -> void:
 			chase_player(delta)
 		"hurt", "dying":
 			velocity = Vector2.ZERO
+
 	
 	move_and_slide()
 
