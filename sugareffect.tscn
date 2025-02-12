@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://doajpvmbs6bgy"]
+
+[ext_resource type="Texture2D" uid="uid://cywd1psuyukvq" path="res://pastaplayer/progressbg.png" id="1_u776i"]
+[ext_resource type="Texture2D" uid="uid://dowdugkmqrnol" path="res://pastaplayer/fullprogress.png" id="2_o0rj6"]
+
+[node name="sugareffect" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+fill_mode = 6
+texture_under = ExtResource("1_u776i")
+texture_progress = ExtResource("2_o0rj6")
+tint_under = Color(0, 0, 0.0941176, 1)
+tint_over = Color(1, 0.0862745, 1, 1)
+tint_progress = Color(0.572549, 0, 0.372549, 1)

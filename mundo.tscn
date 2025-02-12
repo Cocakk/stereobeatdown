@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b46g01mgq4s15"]
+[gd_scene load_steps=7 format=3 uid="uid://b46g01mgq4s15"]
 
 [ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="1_g0ifi"]
 [ext_resource type="PackedScene" uid="uid://cma7r3qh6ci2" path="res://geral/monster/mushroom.tscn" id="2_48byf"]
 [ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="2_e0rww"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="5_ybsgh"]
 [ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="6_lxeoh"]
+[ext_resource type="PackedScene" uid="uid://doajpvmbs6bgy" path="res://sugareffect.tscn" id="6_on305"]
 
 [node name="mundo" type="Node2D"]
 y_sort_enabled = true
@@ -30,6 +31,20 @@ player = NodePath("../player")
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]
 y_sort_enabled = true
 position = Vector2(812, 158)
+
+[node name="sugareffect" parent="player" instance=ExtResource("6_on305")]
+z_index = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -497.0
+offset_top = 97.0
+offset_right = 502.0
+offset_bottom = 127.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="savepoint" parent="." instance=ExtResource("5_ybsgh")]
 position = Vector2(396, 96)
