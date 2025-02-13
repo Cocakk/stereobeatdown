@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var detectionshape = $Area2D/CollisionShape2D
 ##
 signal morreu
+signal dano
 ##
 var speed = 80
 @export var player : Node2D
@@ -37,6 +38,9 @@ func _physics_process(delta: float) -> void:
 			chase_player(delta)
 		"hurt", "dying":
 			velocity = Vector2.ZERO
+		"attack":
+			print("ainda n defini")
+			
 
 	
 	move_and_slide()
@@ -80,8 +84,10 @@ func _on_hit_box_damaged(damage):
 
 func _on_prox_body_entered(body):
 	if state != "dying" and body == player:  # Adicionada verificação
-		state = "idle"
-		anini.play("idle")
+		if state != "attack":
+			state = "attack"
+			anini.play("attacking")
+			emit_signal("dano")
 
 func _on_prox_body_exited(body):
 	if state != "dying" and body == player:  # Adicionada verificação
