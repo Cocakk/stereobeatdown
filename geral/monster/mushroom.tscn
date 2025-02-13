@@ -268,7 +268,7 @@ shape = SubResource("RectangleShape2D_a45sl")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
-radius = 135.0
+radius = 316.74
 avoidance_layers = 21
 
 [node name="Timer" type="Timer" parent="."]
@@ -287,4 +287,5 @@ debug_color = Color(0.886275, 0.298039, 0.380392, 0.419608)
 [connection signal="Damaged" from="HitBox" to="." method="_on_hit_box_damaged"]
 [connection signal="body_entered" from="prox" to="." method="_on_prox_body_entered"]
 [connection signal="body_exited" from="prox" to="." method="_on_prox_body_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

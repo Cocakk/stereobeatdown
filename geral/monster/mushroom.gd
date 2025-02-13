@@ -30,6 +30,11 @@ func set_direction(is_left: bool):
 	anini.scale.x = 1 if is_left else -1
 
 func _physics_process(delta: float) -> void:
+	if nav_agent.avoidance_enabled:
+		nav_agent.set_velocity(velocity)
+	else:
+		_on_navigation_agent_2d_velocity_computed(velocity)
+		
 	match state:
 		"idle":
 			velocity = Vector2.ZERO
@@ -73,6 +78,8 @@ func _on_animated_sprite_2d_animation_finished():
 			state = "chase"
 		else:
 			state = "idle"
+	else:
+		state = "idle"
 
 func _on_hit_box_damaged(damage):
 	damagetaken += 1
@@ -97,3 +104,9 @@ func _on_prox_body_exited(body):
 func _on_timer_timeout():
 	pass
 
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	
+	velocity = safe_velocity
+	pass # Replace with function body.
