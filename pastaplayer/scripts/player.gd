@@ -19,6 +19,8 @@ signal DirectionChanged(new_direction : Vector2)
 func _ready():
 	state_machine.initialize(self)
 	add_to_group("player")
+	for enemy in get_tree().get_nodes_in_group("inimigos"):
+		enemy.connect("morreu", Callable(self, "oinimigomorreu"))
 
 	pass # Replace with function body.
 
@@ -69,8 +71,11 @@ func AnimDirection () -> String:
 		return ("side")
 		
 
-
-
+func oinimigomorreu():
+	timer.start()
+	print("o player recebe o sinal de morte")
+	return
+	
 func _on_timer_timeout():
 	emit_signal("vencivel")
 	invencivel = false
@@ -80,6 +85,6 @@ func _on_timer_timeout():
 
 ##substituir o sinal a baixo pelo sinal emitido pelo inimigo quando morre (não esqueça.
 func _on_attack_reload():
-	timer.start()
+	
 	 ##inserir um reload de timer, isso é só um teste btw...
 	pass # Replace with function body.

@@ -12,20 +12,31 @@ y_sort_enabled = true
 position = Vector2(172, 112)
 
 [node name="Mushroom" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(612, -80)
+position = Vector2(609, -28)
 scale = Vector2(-1, 1)
 face_left = false
 player = NodePath("../player")
 
 [node name="Mushroom2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(516, 11)
+position = Vector2(408, -77)
+scale = Vector2(-1, 1)
+player = NodePath("../player")
+
+[node name="Mushroom3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
+position = Vector2(518, -85)
 scale = Vector2(-1, 1)
 face_left = false
 player = NodePath("../player")
 
-[node name="Mushroom3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(398, -94)
+[node name="Mushroom4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
+position = Vector2(441, 3)
 scale = Vector2(-1, 1)
+player = NodePath("../player")
+
+[node name="Mushroom5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
+position = Vector2(580, -81)
+scale = Vector2(-1, 1)
+face_left = false
 player = NodePath("../player")
 
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]

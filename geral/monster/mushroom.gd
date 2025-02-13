@@ -5,7 +5,9 @@ extends CharacterBody2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var detection_area = $Area2D
 @onready var detectionshape = $Area2D/CollisionShape2D
-
+##
+signal morreu
+##
 var speed = 80
 @export var player : Node2D
 var damagetaken = 0
@@ -15,7 +17,7 @@ var player_in_range = false
 func _ready():
 	set_direction(face_left)
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
-	detection_area.body_exited.connect(_on_detection_area_body_exited)
+
 	
 	var overlapping = detection_area.get_overlapping_bodies()
 	for body in overlapping:
@@ -57,10 +59,7 @@ func _on_detection_area_body_entered(body):
 		player_in_range = true
 		state = "chase"
 
-func _on_detection_area_body_exited(body):
-	if body == player:
-		player_in_range = false
-		state = "idle"
+
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
 		print("ain")
@@ -74,7 +73,7 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_hit_box_damaged(damage):
 	damagetaken += 1
 	print(damagetaken)
-	
+	emit_signal("morreu")
 	state = "dying"
 	print("me morri")
 	anini.play("Death")

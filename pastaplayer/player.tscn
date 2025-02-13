@@ -548,7 +548,7 @@ position = Vector2(2, 0)
 script = ExtResource("9_ukgc4")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.285
+wait_time = 3.0
 autostart = true
 
 [connection signal="reload" from="StateMachine/Attack" to="." method="_on_attack_reload"]
