@@ -268,8 +268,10 @@ shape = SubResource("RectangleShape2D_a45sl")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
-radius = 316.74
+radius = 15.0
 avoidance_layers = 21
+avoidance_mask = 21
+avoidance_priority = 0.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
@@ -282,6 +284,9 @@ visible = false
 shape = SubResource("CircleShape2D_xghpc")
 debug_color = Color(0.886275, 0.298039, 0.380392, 0.419608)
 
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 1.093
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="Damaged" from="HitBox" to="." method="_on_hit_box_damaged"]
@@ -289,3 +294,4 @@ debug_color = Color(0.886275, 0.298039, 0.380392, 0.419608)
 [connection signal="body_exited" from="prox" to="." method="_on_prox_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
