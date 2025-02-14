@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		state = "attack"
 		anini.play("attacking")
 		emit_signal("dano")
-	elif podebate and attackcooldown:
+	elif podebate and attackcooldown and state != "dying":
 		state = "idle"
 	match state:
 		"idle":
@@ -70,7 +70,7 @@ func chase_player(delta: float):
 	
 	
 func _on_detection_area_body_entered(body):
-	if body == player:
+	if body == player and state != "attacking" and state != "dying":
 		player_in_range = true
 		state = "chase"
 
