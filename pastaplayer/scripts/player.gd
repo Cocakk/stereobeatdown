@@ -21,6 +21,8 @@ func _ready():
 	add_to_group("player")
 	for enemy in get_tree().get_nodes_in_group("inimigos"):
 		enemy.connect("morreu", Callable(self, "oinimigomorreu"))
+	for enemy in get_tree().get_nodes_in_group("inimigos"):
+		enemy.connect("dano", Callable(self, "levodano"))
 
 	pass # Replace with function body.
 
@@ -73,9 +75,18 @@ func AnimDirection () -> String:
 
 func oinimigomorreu():
 	timer.start()
+	invencivel = true
 	print("o player recebe o sinal de morte")
 	return
-	
+
+func levodano():
+	if invencivel:
+		print("nem senti sifodakkk")
+	else:
+		print("putz senti aiai uiui")
+
+
+
 func _on_timer_timeout():
 	emit_signal("vencivel")
 	invencivel = false
