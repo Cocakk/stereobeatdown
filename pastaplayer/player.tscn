@@ -15,6 +15,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ogxt3"]
 shader = ExtResource("1_ha5fu")
+shader_parameter/silhouette_color = Color(1, 0, 0, 1)
+shader_parameter/fade_speed = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g77oh"]
 radius = 8.0

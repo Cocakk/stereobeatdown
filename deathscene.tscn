@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://yr6iimh044f"]
+[gd_scene load_steps=11 format=3 uid="uid://yr6iimh044f"]
 
 [ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="1_5bpu1"]
+[ext_resource type="Script" path="res://deathscene.gd" id="1_kbnd3"]
 [ext_resource type="Shader" path="res://ui/neve2.gdshader" id="2_8yduk"]
 [ext_resource type="Texture2D" uid="uid://d8ml08npcwo" path="res://ui/animationbg.png" id="3_8oo26"]
 [ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="4_f2v3d"]
@@ -24,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kbnd3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -36,7 +38,7 @@ color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="Label" type="Label" parent="ColorRect"]
 modulate = Color(1, 0, 0.027451, 1)
-self_modulate = Color(0.87451, 0.635294, 0, 1)
+self_modulate = Color(0.87278, 0.637247, 3.85046e-07, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,3 +97,6 @@ text = "Last Save"
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Main Menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
