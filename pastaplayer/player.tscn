@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b0mt6vx6w303n"]
+[gd_scene load_steps=36 format=3 uid="uid://b0mt6vx6w303n"]
 
 [ext_resource type="Texture2D" uid="uid://x5anajx8su3o" path="res://pastaplayer/sprites/ExamplePlayerSprite.png" id="1_1ecqo"]
 [ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="1_ha5fu"]
@@ -14,13 +14,19 @@
 [ext_resource type="AudioStream" uid="uid://gom80fg8hkfo" path="res://pastaplayer/sound/sword-sound-2-36274.mp3" id="10_ggbjk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ogxt3"]
+resource_local_to_scene = true
 shader = ExtResource("1_ha5fu")
-shader_parameter/silhouette_color = Color(1, 0, 0, 1)
-shader_parameter/fade_speed = 1.0
+shader_parameter/flash_color = Color(1, 0, 0.407843, 1)
+shader_parameter/flash_modifier = 0.7
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g77oh"]
 radius = 8.0
 height = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tooo8"]
+shader = ExtResource("1_ha5fu")
+shader_parameter/flash_color = Color(0.635294, 0.631373, 0, 0.745098)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="Animation" id="Animation_ngbr6"]
 length = 0.001
@@ -509,6 +515,7 @@ position = Vector2(2, 0)
 shape = SubResource("CapsuleShape2D_g77oh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tooo8")
 position = Vector2(2, -16)
 texture = ExtResource("1_1ecqo")
 hframes = 16
