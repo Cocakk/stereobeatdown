@@ -12,7 +12,7 @@ const DIR_4 = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 signal vencivel
 var invencivel = true 
 @onready var timer = $Timer
-
+var morto = false
 
 signal DirectionChanged(new_direction : Vector2)
 # Called when the node enters the scene tree for the first time.
@@ -42,24 +42,25 @@ func _physics_process(_delta):
 	
 
 func _SetDirection() -> bool:
-	
-	if direction == Vector2.ZERO:
-		return false
+	if morto != true:
+		if direction == Vector2.ZERO:
+			return false
 
-	var direction_id : int = int(round((direction + cardinal_direction * 0.1).angle() / TAU * DIR_4.size()))
-	var newdir = DIR_4 [direction_id]
-	if newdir == cardinal_direction:
-		return false 
-	cardinal_direction = newdir
-	DirectionChanged.emit(newdir)
-	sprite.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
+		var direction_id : int = int(round((direction + cardinal_direction * 0.1).angle() / TAU * DIR_4.size()))
+		var newdir = DIR_4 [direction_id]
+		if newdir == cardinal_direction:
+			return false 
+		cardinal_direction = newdir
+		DirectionChanged.emit(newdir)
+		sprite.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
 		
 	return true 
 	
 
 	
 func _UpdateAnimation ( state : String ) -> void:
-	animation_player.play(state + "_" + AnimDirection())
+	if morto != true:
+		animation_player.play(state + "_" + AnimDirection())
 	
 pass
 func AnimDirection () -> String:
@@ -80,10 +81,13 @@ func oinimigomorreu():
 	return
 
 func levodano():
+	var danorecebido = 0
 	if invencivel:
 		print("nem senti sifodakkk")
 	else:
-		print("putz senti aiai uiui")
+		print("recebi dano")
+		animation_player.play("morte")
+		morto = true
 
 
 
@@ -98,4 +102,10 @@ func _on_timer_timeout():
 func _on_attack_reload():
 	
 	 ##inserir um reload de timer, isso é só um teste btw...
+	pass # Replace with function body.
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "morte":
+		get_tree().change_scene_to_file("res://deathscene.tscn")
 	pass # Replace with function body.
