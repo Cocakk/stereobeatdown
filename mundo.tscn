@@ -1,15 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://b46g01mgq4s15"]
+[gd_scene load_steps=11 format=3 uid="uid://b46g01mgq4s15"]
 
+[ext_resource type="Script" path="res://mundo.gd" id="1_cm6j6"]
 [ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="1_g0ifi"]
 [ext_resource type="PackedScene" uid="uid://cma7r3qh6ci2" path="res://geral/monster/mushroom.tscn" id="2_48byf"]
 [ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="2_e0rww"]
+[ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="3_xduh6"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="5_ybsgh"]
 [ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="6_lxeoh"]
 [ext_resource type="PackedScene" uid="uid://doajpvmbs6bgy" path="res://sugareffect.tscn" id="6_on305"]
+[ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="9_6x2iv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe8s0"]
+resource_local_to_scene = true
+shader = ExtResource("3_xduh6")
+shader_parameter/flash_color = Color(1, 0, 0.407843, 1)
+shader_parameter/flash_modifier = 0.7
 
 [node name="mundo" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(172, 112)
+script = ExtResource("1_cm6j6")
 
 [node name="Mushroom" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(609, -28)
@@ -41,6 +51,7 @@ player = NodePath("../player")
 
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_qe8s0")
 position = Vector2(7, 146)
 
 [node name="sugareffect" parent="player" instance=ExtResource("6_on305")]
@@ -81,3 +92,7 @@ layer_1/tile_data = PackedInt32Array(-131104, 917508, 4, -131098, 262148, 4, -13
 layer_2/name = "decoração"
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(65502, 1638400, 8, -34, 1638400, 8, 65507, 1638400, 8, -29, 1638400, 8, -27, 1638400, 8, 65509, 1638400, 8, -31, 1638400, 8, 65505, 1638400, 8, -25, 1638400, 8, 65511, 1638400, 8, -65497, 1638400, 8, 39, 1638400, 8, -65498, 1638400, 8, 38, 1638400, 8, -65499, 1638400, 8, 37, 1638400, 8)
+
+[node name="transition" parent="." instance=ExtResource("9_6x2iv")]
+
+[connection signal="animation_finished" from="transition" to="portal" method="_on_transition_animation_finished"]

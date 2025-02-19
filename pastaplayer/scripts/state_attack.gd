@@ -16,7 +16,7 @@ var dash_duration : float = 0.2
 var dash_timer : float = 0.0
 signal reload
 var attacking : bool = false
-
+var morto
 #o que acontece quando o player entra nesse estado?
 func Enter () -> void: 
 	player._UpdateAnimation("attack")
@@ -27,7 +27,7 @@ func Enter () -> void:
 	audio.pitch_scale = randf_range(0.9,1.1)
 	audio.play()
 	attacking = true
-	if player.direction != Vector2.ZERO:
+	if player.direction != Vector2.ZERO and !morto:
 		player.velocity = player.direction * dash_speed
 	
 	
@@ -51,7 +51,7 @@ func Process(_delta : float) -> State:
 	
 	
 	
-	if attacking:
+	if attacking and !morto:
 		if dash_timer < dash_duration:
 			dash_timer += _delta
 			emit_signal("reload")
@@ -80,3 +80,9 @@ func HandleInput(_event: InputEvent) -> State:
 
 func EndAttack(_newAnimName : String)-> void:
 	attacking = false
+
+
+func _on_player_morreu():
+	morto = true
+	attacking = false
+	pass # Replace with function body.

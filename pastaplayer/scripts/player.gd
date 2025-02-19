@@ -13,7 +13,7 @@ signal vencivel
 var invencivel = true 
 @onready var timer = $Timer
 var morto = false
-
+signal morreu
 signal DirectionChanged(new_direction : Vector2)
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -89,6 +89,7 @@ func levodano():
 		print("recebi dano")
 		animation_player.play("morte")
 		morto = true
+		emit_signal("morreu")
 		
 
 
