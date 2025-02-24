@@ -13,6 +13,7 @@ config_version=5
 config/name="Topdown Teste"
 run/main_scene="res://ui/menusections/menumanager.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+run/max_fps=30
 config/icon="res://icon.svg"
 
 [display]
@@ -23,6 +24,7 @@ window/size/window_width_override=1080
 window/size/window_height_override=550
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="res://cursor.png"
 
 [file_customization]
 
