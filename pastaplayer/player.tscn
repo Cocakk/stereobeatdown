@@ -319,7 +319,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [27, 29]
+"values": [26, 28]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -452,7 +452,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6v31o"]
 resource_name = "walk_side"
-length = 0.3
+length = 0.5
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -461,7 +461,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [17, 20]
@@ -469,7 +469,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_3i3r8"]
 resource_name = "walk_up"
-length = 0.3
+length = 0.5
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -478,7 +478,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.275),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [13, 16]
@@ -525,7 +525,7 @@ vframes = 3
 position = Vector2(0, 10)
 texture = ExtResource("3_xaq8x")
 hframes = 12
-frame = 8
+frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/AttackEffectSprite"]
 libraries = {

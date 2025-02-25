@@ -1,17 +1,17 @@
 extends CharacterBody2D
 
+### Variáveis e Conexões
 @export var face_left: bool = true
 @onready var anini = $AnimatedSprite2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var detection_area = $Area2D
 @onready var detectionshape = $Area2D/CollisionShape2D
 @onready var timer_2 = $Timer2
+@export var attention = false
 
-
-##
 signal morreu
 signal dano
-##
+
 var speed = 80
 @export var player : Node2D
 var damagetaken = 0
@@ -19,18 +19,35 @@ var state = "idle"
 var podebate = false
 var player_in_range = false
 var attackcooldown = false
+var can_detect_player = false  # Nova variável para controlar a detecção do jogador
+
+### Funções de Inicialização
 func _ready():
 	nav_agent.avoidance_enabled = false
 	set_direction(face_left)
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
+	
+	# Conectar o sinal "morreu" do grupo "inimigos"
+	add_to_group("inimigos")
+	connect("morreu", Callable(self, "_on_any_enemy_died"))
 
-	var overlapping = detection_area.get_overlapping_bodies()
-	for body in overlapping:
-		if body == player and state != "dying":
-			player_in_range = true
-			state = "chase"
 
+func _on_any_enemy_died():
+	attention = true
+	print("teste a  a a a  a a a a ")
+	if player_in_range and state != "dying":
+		print("teste b b b b b bb b bb b ")
+		state = "chase"
+
+	
+### Processamento Físico
 func _physics_process(delta: float) -> void:
+	if not attention and not can_detect_player:
+		state = "idle"
+		velocity = Vector2.ZERO
+		anini.play("idle")
+		return
+
 	# Verifica se pode atacar
 	if podebate and state != "dying" and state != "attack" and !attackcooldown:
 		state = "attack"
@@ -38,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		emit_signal("dano")
 	elif podebate and attackcooldown and state != "dying":
 		state = "idle"
+	
 	match state:
 		"idle":
 			velocity = Vector2.ZERO
@@ -52,6 +70,7 @@ func _physics_process(delta: float) -> void:
 	nav_agent.set_velocity(velocity)
 	move_and_slide()
 
+### Funções de Movimento e Detecção
 func chase_player(delta: float):
 	if not player or not is_instance_valid(player):
 		if state != "dying":
@@ -66,13 +85,18 @@ func chase_player(delta: float):
 	nav_agent.set_velocity(velocity)
 	anini.play("run")
 	set_direction(direction.x < 0)
-	
-	
-	
+
 func _on_detection_area_body_entered(body):
 	if body == player and state != "attacking" and state != "dying":
 		player_in_range = true
-		state = "chase"
+		if attention and state != "dying":
+			state = "chase"
+func notify_enemy_death():
+	emit_signal("morreu")
+### Funções de Eventos
+func _on_inimigo_morreu():
+	if not attention:
+		can_detect_player = true
 
 func _on_prox_body_entered(body):
 	if body == player:  # Verifica se é o jogador
@@ -112,6 +136,7 @@ func _on_timer_2_timeout():
 		anini.play("attacking")
 		emit_signal("dano")
 
+### Funções Auxiliares
 func set_direction(is_left: bool):
 	anini.scale.x = 1 if is_left else -1
 
