@@ -257,7 +257,7 @@ height = 14.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a45sl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xghpc"]
-radius = 109.61
+radius = 286.531
 
 [node name="Mushroom" type="CharacterBody2D" groups=["inimigos"]]
 collision_mask = 16
@@ -306,7 +306,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_xghpc")

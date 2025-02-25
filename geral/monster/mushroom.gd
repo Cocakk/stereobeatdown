@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var detection_area = $Area2D
 @onready var detectionshape = $Area2D/CollisionShape2D
 @onready var timer_2 = $Timer2
-@export var attention = false
+@export var attention = true
 
 signal morreu
 signal dano
@@ -29,15 +29,10 @@ func _ready():
 	
 	# Conectar o sinal "morreu" do grupo "inimigos"
 	add_to_group("inimigos")
-	connect("morreu", Callable(self, "_on_any_enemy_died"))
+	Morte.connect("morreu", Callable(self, "_on_any_enemy_died"))
 
 
-func _on_any_enemy_died():
-	attention = true
-	print("teste a  a a a  a a a a ")
-	if player_in_range and state != "dying":
-		print("teste b b b b b bb b bb b ")
-		state = "chase"
+
 
 	
 ### Processamento Físico
@@ -72,6 +67,7 @@ func _physics_process(delta: float) -> void:
 
 ### Funções de Movimento e Detecção
 func chase_player(delta: float):
+	print("esta em chase")
 	if not player or not is_instance_valid(player):
 		if state != "dying":
 			state = "idle"
@@ -92,11 +88,9 @@ func _on_detection_area_body_entered(body):
 		if attention and state != "dying":
 			state = "chase"
 func notify_enemy_death():
-	emit_signal("morreu")
+	Morte.emit_signal("morreu")
 ### Funções de Eventos
-func _on_inimigo_morreu():
-	if not attention:
-		can_detect_player = true
+
 
 func _on_prox_body_entered(body):
 	if body == player:  # Verifica se é o jogador
@@ -140,9 +134,12 @@ func _on_timer_2_timeout():
 func set_direction(is_left: bool):
 	anini.scale.x = 1 if is_left else -1
 
+
+## Quando o bucha do inimigo leva dano
 func _on_hit_box_damaged(damage):
 	damagetaken += 1
 	print(damagetaken)
+	Morte.emit_signal("morreu")
 	emit_signal("morreu")
 	state = "dying"
 	print("me morri")
@@ -150,3 +147,13 @@ func _on_hit_box_damaged(damage):
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity
+
+
+
+	
+func _on_any_enemy_died():
+	attention = true
+	print("teste a  a a a  a a a a ")
+	if player_in_range and state != "dying":
+		print("teste b b b b b bb b bb b ")
+		state = "chase"

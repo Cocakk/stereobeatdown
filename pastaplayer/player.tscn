@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b0mt6vx6w303n"]
+[gd_scene load_steps=37 format=3 uid="uid://b0mt6vx6w303n"]
 
 [ext_resource type="Texture2D" uid="uid://x5anajx8su3o" path="res://pastaplayer/sprites/ExamplePlayerSprite.png" id="1_1ecqo"]
 [ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="1_ha5fu"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cptrrk13abf58" path="res://geral/hurtbox/hurt_box.tscn" id="9_6uggg"]
 [ext_resource type="Script" path="res://pastaplayer/scripts/PlayerInteractionHost.gd" id="9_ukgc4"]
 [ext_resource type="AudioStream" uid="uid://gom80fg8hkfo" path="res://pastaplayer/sound/sword-sound-2-36274.mp3" id="10_ggbjk"]
+[ext_resource type="PackedScene" uid="uid://doajpvmbs6bgy" path="res://sugareffect.tscn" id="13_wpo2v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ogxt3"]
 resource_local_to_scene = true
@@ -288,10 +289,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [21, 23]
+"values": [21, 24]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -344,10 +345,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [24, 26]
+"values": [29, 32]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -525,7 +526,7 @@ vframes = 3
 position = Vector2(0, 10)
 texture = ExtResource("3_xaq8x")
 hframes = 12
-frame = 11
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/AttackEffectSprite"]
 libraries = {
@@ -579,8 +580,22 @@ position = Vector2(2, 0)
 script = ExtResource("9_ukgc4")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.01
 autostart = true
+
+[node name="sugareffect" parent="." instance=ExtResource("13_wpo2v")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -256.0
+offset_top = 78.0
+offset_right = 743.0
+offset_bottom = 108.0
+grow_vertical = 1
+scale = Vector2(0.519999, 0.640001)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [connection signal="morreu" from="." to="StateMachine/walk" method="_on_player_morreu"]
 [connection signal="morreu" from="." to="StateMachine/Attack" method="_on_player_morreu"]

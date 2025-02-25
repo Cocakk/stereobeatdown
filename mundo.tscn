@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b46g01mgq4s15"]
+[gd_scene load_steps=10 format=3 uid="uid://b46g01mgq4s15"]
 
 [ext_resource type="Script" path="res://mundo.gd" id="1_cm6j6"]
 [ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="1_g0ifi"]
@@ -7,7 +7,6 @@
 [ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="3_xduh6"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="5_ybsgh"]
 [ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="6_lxeoh"]
-[ext_resource type="PackedScene" uid="uid://doajpvmbs6bgy" path="res://sugareffect.tscn" id="6_on305"]
 [ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="9_6x2iv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qe8s0"]
@@ -25,28 +24,33 @@ script = ExtResource("1_cm6j6")
 position = Vector2(609, -28)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
 player = NodePath("../player")
 
 [node name="Mushroom6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(502, -28)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
 player = NodePath("../player")
 
 [node name="Mushroom2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(408, -77)
 scale = Vector2(-1, 1)
+attention = false
 player = NodePath("../player")
 
 [node name="Mushroom3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(518, -85)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
 player = NodePath("../player")
 
 [node name="Mushroom4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(441, 3)
 scale = Vector2(-1, 1)
+attention = false
 player = NodePath("../player")
 
 [node name="Mushroom5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
@@ -59,21 +63,6 @@ player = NodePath("../player")
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_qe8s0")
 position = Vector2(7, 146)
-
-[node name="sugareffect" parent="player" instance=ExtResource("6_on305")]
-z_index = 2
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-offset_left = -238.0
-offset_top = 86.0
-offset_right = 761.0
-offset_bottom = 116.0
-grow_vertical = 0
-scale = Vector2(0.480001, 1)
-size_flags_horizontal = 4
-size_flags_vertical = 8
 
 [node name="savepoint" parent="." instance=ExtResource("5_ybsgh")]
 position = Vector2(396, 96)
