@@ -12,6 +12,9 @@ extends CharacterBody2D
 signal morreu
 signal dano
 
+
+var playermorto = false
+
 var speed = 80
 @export var player : Node2D
 var damagetaken = 0
@@ -30,9 +33,14 @@ func _ready():
 	# Conectar o sinal "morreu" do grupo "inimigos"
 	add_to_group("inimigos")
 	Morte.connect("morreu", Callable(self, "_on_any_enemy_died"))
+	for player in get_tree().get_nodes_in_group("player"):
+		connect("playermorreu", Callable(self, "mortedoplayer"))
 
 
-
+func mortedoplayer():
+	print("recebido sinal de morte do player")
+	playermorto = true
+	return
 
 	
 ### Processamento Físico
@@ -137,13 +145,14 @@ func set_direction(is_left: bool):
 
 ## Quando o bucha do inimigo leva dano
 func _on_hit_box_damaged(damage):
-	damagetaken += 1
-	print(damagetaken)
-	Morte.emit_signal("morreu")
-	emit_signal("morreu")
-	state = "dying"
-	print("me morri")
-	anini.play("Death")
+	if state != "dying" and !playermorto:
+		damagetaken += 1
+		print(damagetaken)
+		Morte.emit_signal("morreu")
+		emit_signal("morreu")
+		state = "dying"
+		print("me morri")
+		anini.play("Death")
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity

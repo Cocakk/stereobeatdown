@@ -68,12 +68,12 @@ position = Vector2(7, 146)
 position = Vector2(396, 96)
 
 [node name="portal" parent="." instance=ExtResource("6_lxeoh")]
-visible = false
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(736, 138)
+position = Vector2(739, 131)
 scale = Vector2(0.75, 0.75)
 next_scene = "res://mundo_2.tscn"
+inimigos = 6
 
 [node name="SprTile01" parent="." instance=ExtResource("2_e0rww")]
 scale = Vector2(2, 2)
