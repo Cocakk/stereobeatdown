@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctetxw82ki8av"]
+[gd_scene load_steps=5 format=3 uid="uid://ctetxw82ki8av"]
 
 [ext_resource type="Script" path="res://ui/menusections/menumanager.gd" id="1_5a30s"]
 [ext_resource type="PackedScene" uid="uid://baju1ebypxyvq" path="res://ui/menusections/menu2.tscn" id="1_gdvrm"]
 [ext_resource type="PackedScene" uid="uid://3gwlceicy4du" path="res://ui/menusections/menu.tscn" id="2_tokal"]
+[ext_resource type="AudioStream" uid="uid://dnbsxu28na37w" path="res://mainmenu.wav" id="4_sp6gr"]
 
 [node name="Menumanager" type="Node"]
 script = ExtResource("1_5a30s")
@@ -22,6 +23,10 @@ text = "Novo jogo"
 text = "Sair"
 
 [node name="texture" parent="." instance=ExtResource("2_tokal")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sp6gr")
+autoplay = true
 
 [connection signal="pressed" from="Control/texture/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Control/texture/MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

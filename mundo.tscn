@@ -68,6 +68,7 @@ position = Vector2(7, 146)
 position = Vector2(396, 96)
 
 [node name="portal" parent="." instance=ExtResource("6_lxeoh")]
+visible = false
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(739, 131)
