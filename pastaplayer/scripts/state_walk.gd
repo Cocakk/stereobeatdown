@@ -6,6 +6,7 @@ class_name stateWalk extends State
 var morto = false
 @onready var idle : State = $"../idle"
 @onready var attack : State = $"../Attack"
+@onready var drink = $"../Node"
 
 
 
@@ -37,7 +38,8 @@ func Physics(_delta : float) -> State:
 func HandleInput(_event : InputEvent) -> State:
 	if _event.is_action_pressed("attack"):  # Adicione esta verificação
 		return attack
-	
+	if _event.is_action_pressed("drink"):
+		return drink
 	return null
 
 

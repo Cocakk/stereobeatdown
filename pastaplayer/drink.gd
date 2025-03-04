@@ -1,16 +1,21 @@
 
 #uso de "state" no lugar de "estado" para facilitar em situações futuras.
-class_name stateIdle extends State
+class_name stateDrink extends State
 
-
+var candrink = true
 @onready var walk : State=$"../walk"
 @onready var attack : State = $"../Attack"
-@onready var drink = $"../drink"
+@onready var idle = $"../idle"
+@onready var animation_player = $"../../AnimationPlayer"
 
 
 #o que acontece quando o player entra nesse estado?
 func Enter () -> void: 
-	player._UpdateAnimation("idle")
+	if candrink == true:
+		print("bebendo")
+		animation_player.play("bebendo")
+		
+
 	pass
 
 
@@ -31,7 +36,13 @@ func Physics(_delta : float) -> State:
 func HandleInput( _event: InputEvent) -> State:
 	if _event.is_action_pressed("attack"):
 		return attack
-	if _event.is_action_pressed("drink"):
-		return drink
 	return null
 
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "bebendo":
+		candrink = false
+		print("idle")
+		return idle
+	pass # Replace with function body.

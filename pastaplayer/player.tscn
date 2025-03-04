@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b0mt6vx6w303n"]
+[gd_scene load_steps=39 format=3 uid="uid://b0mt6vx6w303n"]
 
 [ext_resource type="Texture2D" uid="uid://x5anajx8su3o" path="res://pastaplayer/sprites/ExamplePlayerSprite.png" id="1_1ecqo"]
 [ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="1_ha5fu"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cptrrk13abf58" path="res://geral/hurtbox/hurt_box.tscn" id="9_6uggg"]
 [ext_resource type="Script" path="res://pastaplayer/scripts/PlayerInteractionHost.gd" id="9_ukgc4"]
 [ext_resource type="AudioStream" uid="uid://gom80fg8hkfo" path="res://pastaplayer/sound/sword-sound-2-36274.mp3" id="10_ggbjk"]
+[ext_resource type="Script" path="res://pastaplayer/drink.gd" id="11_khyib"]
 [ext_resource type="PackedScene" uid="uid://doajpvmbs6bgy" path="res://sugareffect.tscn" id="13_wpo2v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ogxt3"]
@@ -485,12 +486,29 @@ tracks/0/keys = {
 "values": [13, 16]
 }
 
+[sub_resource type="Animation" id="Animation_feih7"]
+resource_name = "bebendo"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [48, 69]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jokpn"]
 _data = {
 "RESET": SubResource("Animation_bawdi"),
 "attack_down": SubResource("Animation_kkko1"),
 "attack_side": SubResource("Animation_87oeb"),
 "attack_up": SubResource("Animation_y0bbv"),
+"bebendo": SubResource("Animation_feih7"),
 "idle_down": SubResource("Animation_nxp1k"),
 "idle_down_": SubResource("Animation_01uu4"),
 "idle_side": SubResource("Animation_wgwxu"),
@@ -520,7 +538,7 @@ material = SubResource("ShaderMaterial_tooo8")
 position = Vector2(2, -16)
 texture = ExtResource("1_1ecqo")
 hframes = 16
-vframes = 3
+vframes = 6
 
 [node name="AttackEffectSprite" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(0, 10)
@@ -563,8 +581,10 @@ script = ExtResource("5_vu3d5")
 script = ExtResource("6_47ibh")
 attack_sound = ExtResource("8_seffx")
 
+[node name="drink" type="Node" parent="StateMachine"]
+script = ExtResource("11_khyib")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
@@ -600,5 +620,6 @@ size_flags_vertical = 4
 [connection signal="morreu" from="." to="StateMachine/walk" method="_on_player_morreu"]
 [connection signal="morreu" from="." to="StateMachine/Attack" method="_on_player_morreu"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/drink" method="_on_animation_player_animation_finished"]
 [connection signal="reload" from="StateMachine/Attack" to="." method="_on_attack_reload"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
