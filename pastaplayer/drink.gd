@@ -7,7 +7,7 @@ var candrink = true
 @onready var attack : State = $"../Attack"
 @onready var idle = $"../idle"
 @onready var animation_player = $"../../AnimationPlayer"
-
+signal bebi
 
 #o que acontece quando o player entra nesse estado?
 func Enter () -> void: 
@@ -44,5 +44,6 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "bebendo":
 		candrink = false
 		print("idle")
+		emit_signal("bebi")
 		return idle
 	pass # Replace with function body.

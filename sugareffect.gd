@@ -22,3 +22,12 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "loadoff":
 		anim.play("loadoff_2")
 	pass # Replace with function body.
+
+
+
+
+
+func _on_drink_bebi():
+	anim.stop()
+	anim.play("loadoff")
+	pass # Replace with function body.

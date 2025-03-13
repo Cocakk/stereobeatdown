@@ -11,7 +11,7 @@ const DIR_4 = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 @onready var sprite : Sprite2D = $Sprite2D
 signal vencivel
 signal playermorreu
-var invencivel = true 
+var invencivel = false
 @onready var timer = $Timer
 var morto = false
 signal morreu
@@ -88,7 +88,10 @@ func levodano():
 		
 	else:
 		print("recebi dano")
-		animation_player.play("morte")
+		if direction.y <= 0:
+			animation_player.play("morte_up")
+		elif direction.y >= 0:
+			animation_player.play("morte_down")
 		morto = true
 		emit_signal("morreu")
 		emit_signal("playermorreu")
@@ -110,9 +113,14 @@ func _on_attack_reload():
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "morte":
+	if anim_name == "morte_up" or anim_name == "morte_down":
 		get_tree().change_scene_to_file("res://deathscene.tscn")
 	pass # Replace with function body.
 
 
+	pass # Replace with function body.
+
+
+func _on_drink_bebi():
+	timer.start()
 	pass # Replace with function body.

@@ -4,8 +4,36 @@
 [ext_resource type="Texture2D" uid="uid://cywd1psuyukvq" path="res://pastaplayer/progressbg.png" id="1_u776i"]
 [ext_resource type="Texture2D" uid="uid://dowdugkmqrnol" path="res://pastaplayer/fullprogress.png" id="2_o0rj6"]
 
+[sub_resource type="Animation" id="Animation_bmisi"]
+resource_name = "loadoff"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureProgressBar:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(0.535887, 3.03143),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="Animation" id="Animation_1acs7"]
-resource_name = "invisivel"
+resource_name = "loadoff_2"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
@@ -31,38 +59,10 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_bmisi"]
-resource_name = "loadoff"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureProgressBar:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [100.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureProgressBar:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.9),
-"transitions": PackedFloat32Array(0.535887, 3.03143),
-"update": 0,
-"values": [true, false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_owakc"]
 _data = {
-"invisivel": SubResource("Animation_1acs7"),
-"loadoff": SubResource("Animation_bmisi")
+"loadoff": SubResource("Animation_bmisi"),
+"loadoff_2": SubResource("Animation_1acs7")
 }
 
 [node name="sugareffect" type="MarginContainer"]
@@ -79,7 +79,6 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-value = 100.0
 fill_mode = 6
 texture_under = ExtResource("1_u776i")
 texture_progress = ExtResource("2_o0rj6")
@@ -91,6 +90,6 @@ tint_progress = Color(0.572549, 0, 0.372549, 1)
 libraries = {
 "": SubResource("AnimationLibrary_owakc")
 }
-autoplay = "invisivel"
+autoplay = "loadoff_2"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
