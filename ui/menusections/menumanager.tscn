@@ -14,15 +14,26 @@ script = ExtResource("1_5a30s")
 theme_override_constants/separation = 15
 
 [node name="Button" parent="Control/texture/MarginContainer/VBoxContainer" index="0"]
-text = "Continuar"
+text = "Continue"
 
 [node name="Button2" parent="Control/texture/MarginContainer/VBoxContainer" index="1"]
-text = "Novo jogo"
+text = "New game"
 
 [node name="Button3" parent="Control/texture/MarginContainer/VBoxContainer" index="2"]
-text = "Sair"
+text = "Back"
 
 [node name="texture" parent="." instance=ExtResource("2_tokal")]
+
+[node name="Jogar" parent="texture/MarginContainer/VBoxContainer" index="0"]
+text = "Play
+"
+
+[node name="Opcao" parent="texture/MarginContainer/VBoxContainer" index="1"]
+text = "Credits"
+
+[node name="Sair" parent="texture/MarginContainer/VBoxContainer" index="2"]
+text = "Quit
+"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_sp6gr")

@@ -8,14 +8,14 @@ var key = "beterruba"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	label.visible = false
-	label.text = "Deseja salvar o seu progresso?"
+	label.text = "Do you want to save your progress?"
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if player_in_area and Input.is_action_just_pressed("attack"):
-		label.text = "Progresso salvo!"
+		label.text = "Progress saved!"
 		var config = ConfigFile.new()
 		config.set_value("Scenes", "Name", get_tree().current_scene.scene_file_path)
 		config.save_encrypted_pass("res://save/scenes.cfg", key)

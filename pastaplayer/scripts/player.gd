@@ -118,9 +118,10 @@ func _on_animation_player_animation_finished(anim_name):
 	pass # Replace with function body.
 
 
-	pass # Replace with function body.
+
 
 
 func _on_drink_bebi():
 	timer.start()
+	invencivel = true
 	pass # Replace with function body.

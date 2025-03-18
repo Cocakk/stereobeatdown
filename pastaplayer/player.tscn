@@ -559,6 +559,7 @@ vframes = 6
 
 [node name="AttackEffectSprite" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(0, 10)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_xaq8x")
 hframes = 12
 frame = 8

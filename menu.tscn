@@ -77,19 +77,18 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
-text = "Jogar"
 
 [node name="Opcao" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_tkfth")]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
-text = "Opções"
+text = "Credits"
 
 [node name="Sair" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_tkfth")]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
-text = "Sair"
+text = "Quit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Opcao" to="." method="_on_opcao_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]

@@ -27,7 +27,7 @@ var podebate = false
 var player_in_range = false
 var attackcooldown = false
 var can_detect_player = false
-var preferred_distance = 100  # Distância desejada do jogador
+var preferred_distance = 150  # Distância desejada do jogador
 
 
 ##isso já é quase um pedido de socorro

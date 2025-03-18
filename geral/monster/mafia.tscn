@@ -289,7 +289,7 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_m03vw")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.569357
+frame_progress = 0.845078
 
 [node name="HitBox" parent="." instance=ExtResource("5_trbm3")]
 visible = false
