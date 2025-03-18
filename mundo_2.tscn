@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfnbeyit81311"]
+[gd_scene load_steps=11 format=3 uid="uid://cfnbeyit81311"]
 
 [ext_resource type="Script" path="res://mundo.gd" id="1_6guri"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="2_x23o8"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="6_qdoqm"]
 [ext_resource type="PackedScene" uid="uid://cma7r3qh6ci2" path="res://geral/monster/mushroom.tscn" id="7_ap6mr"]
 [ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="8_jt2d5"]
+[ext_resource type="PackedScene" uid="uid://ktgh7pa1r2tp" path="res://geral/monster/mafia.tscn" id="9_f56rd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5idlt"]
 resource_local_to_scene = true
@@ -98,3 +99,6 @@ player = NodePath("../player")
 [node name="portal" parent="." instance=ExtResource("8_jt2d5")]
 position = Vector2(160, -1009)
 inimigos = 7
+
+[node name="Mafia" parent="." instance=ExtResource("9_f56rd")]
+position = Vector2(446, -42)
