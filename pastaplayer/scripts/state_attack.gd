@@ -56,9 +56,9 @@ func Process(_delta : float) -> State:
 			dash_timer += _delta
 			emit_signal("reload")
 		else:
-			player.velocity = player.velocity.move_toward(Vector2.ZERO, decelerate_speed * _delta)
+			player.velocity = player.velocity.move_toward(Vector2.ZERO, decelerate_speed * _delta * 0)
 	else:
-		player.velocity = player.velocity.move_toward(Vector2.ZERO, decelerate_speed * _delta)
+		player.velocity = player.velocity.move_toward(Vector2.ZERO, decelerate_speed * _delta * 0)
 	
 	
 	

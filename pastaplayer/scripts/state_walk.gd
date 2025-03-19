@@ -28,7 +28,7 @@ func Process(_delta : float) -> State:
 	
 	if morto:
 		player.velocity = player.direction * move_speed * 0
-	if player._SetDirection():
+	elif player._SetDirection():
 		player._UpdateAnimation("walk")
 		
 	return null

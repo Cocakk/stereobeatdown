@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var shoot_timer = $ShootTimer  # Novo timer para atirar
 @onready var ray_cast_2d = $RayCast2D
 @onready var bullet_scene = preload("res://geral/bullet/bullet.tscn")  # Certifique-se de colocar o caminho correto
+@onready var weapon_point = $weaponpoint
 
 signal morreu
 signal dano
@@ -27,10 +28,8 @@ var podebate = false
 var player_in_range = false
 var attackcooldown = false
 var can_detect_player = false
-var preferred_distance = 150  # Distância desejada do jogador
+var preferred_distance = 175  # Distância desejada do jogador
 
-
-##isso já é quase um pedido de socorro
 var direction_tolerance = 0.7  # Margem para considerar mudança de direção
 var last_player_position: Vector2 = Vector2.ZERO
 var position_update_cooldown = 0.5  # Tempo entre atualizações de posição
@@ -125,7 +124,9 @@ func _on_detection_area_body_entered(body):
 		player_in_range = true
 		if attention and state != STATES.DYING:
 			state = STATES.CHASE
-
+	elif body.is_in_group("bullets") and body.returning:
+		queue_free()
+		
 func _on_prox_body_entered(body):
 	if body == player:
 		podebate = true
@@ -162,7 +163,10 @@ func _on_timer_2_timeout():
 
 func set_direction(is_left: bool):
 	anini.scale.x = -1 if is_left else 1
-
+	if is_left:
+		weapon_point.position.x = -abs(weapon_point.position.x) # Ajuste a posição X para a esquerda
+	else:
+		weapon_point.position.x = abs(weapon_point.position.x) # Ajuste a posição X para a direita
 
 func _on_hit_box_damaged(damage):
 	if state != STATES.DYING and !playermorto:
@@ -176,24 +180,24 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	if state == STATES.CHASE:
 		velocity = velocity.lerp(safe_velocity, 0.1)
 
-# Função para atirar com RayCast verificado corretamente.
 func _on_shoot_timer_timeout():
-	if player and is_instance_valid(player) and state != STATES.DYING:
-		# Atualize o raycast para verificar o jogador.
-		ray_cast_2d.target_position = player.global_position - global_position
+
+	if player and is_instance_valid(player) and state != STATES.DYING and attention:
+		# Atualize a direção do RayCast2D para apontar para o jogador
+		ray_cast_2d.target_position = player.global_position - ray_cast_2d.global_position
 		ray_cast_2d.force_raycast_update()
 
+		# Verifique se o RayCast2D está colidindo com o jogador
 		if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
+			anini.play("attacking")
 			var bullet = bullet_scene.instantiate()
-			bullet.global_position = global_position
-
-			# Define a direção da bala.
-			var direction = (player.global_position - global_position).normalized()
+			bullet.global_position = weapon_point.global_position
+			var direction = (player.global_position - weapon_point.global_position).normalized()
 			bullet.set_direction(direction)
-			get_parent().add_child(bullet)  # Adiciona ao nó pai.
-			print("Atirou!")  # Debug.
+			get_parent().add_child(bullet)
+			
+			get_parent().add_child(bullet)
 
-# Função de debug para informações do inimigo.
 func debug_info():
 	print(
 		"Estado: %s\nVelocidade: %s\nPlayer Válido: %s" % [

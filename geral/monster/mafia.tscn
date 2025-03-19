@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bc6p88bic5l5c" path="res://geral/hitbox/hit_box.tscn" id="5_trbm3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8gub"]
-radius = 6.08276
+radius = 13.1529
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5k4ly"]
 atlas = ExtResource("2_yc5yx")
@@ -49,21 +49,29 @@ region = Rect2(896, 0, 64, 64)
 atlas = ExtResource("2_yc5yx")
 region = Rect2(960, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bxdh2"]
-atlas = ExtResource("2_yc5yx")
-region = Rect2(704, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_utpxc"]
+atlas = ExtResource("5_toqje")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_isxdo"]
-atlas = ExtResource("2_yc5yx")
-region = Rect2(768, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_idb58"]
+atlas = ExtResource("5_toqje")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtwpq"]
-atlas = ExtResource("2_yc5yx")
-region = Rect2(832, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtfy2"]
+atlas = ExtResource("5_toqje")
+region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r7nt8"]
-atlas = ExtResource("2_yc5yx")
-region = Rect2(896, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tu5d"]
+atlas = ExtResource("5_toqje")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okv5r"]
+atlas = ExtResource("5_toqje")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54l1o"]
+atlas = ExtResource("5_toqje")
+region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lf4qd"]
 atlas = ExtResource("3_g3yg3")
@@ -88,14 +96,6 @@ region = Rect2(320, 0, 80, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_c137c"]
 atlas = ExtResource("5_toqje")
 region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hw2i1"]
-atlas = ExtResource("5_toqje")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rmoyn"]
-atlas = ExtResource("5_toqje")
-region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yr06c"]
 atlas = ExtResource("5_toqje")
@@ -179,20 +179,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bxdh2")
+"texture": SubResource("AtlasTexture_utpxc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_isxdo")
+"texture": SubResource("AtlasTexture_idb58")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xtwpq")
+"texture": SubResource("AtlasTexture_gtfy2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r7nt8")
+"texture": SubResource("AtlasTexture_7tu5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okv5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54l1o")
 }],
 "loop": false,
 "name": &"attacking",
-"speed": 7.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -215,18 +221,12 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_c137c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hw2i1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rmoyn")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 3.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -279,6 +279,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 platform_floor_layers = 4294967279
 script = ExtResource("1_ego8v")
+attention = false
 
 [node name="colisao" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -287,9 +288,8 @@ shape = SubResource("CircleShape2D_q8gub")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_m03vw")
-animation = &"idle"
+animation = &"attacking"
 autoplay = "idle"
-frame_progress = 0.845078
 
 [node name="HitBox" parent="." instance=ExtResource("5_trbm3")]
 visible = false
@@ -328,10 +328,14 @@ debug_color = Color(0.886275, 0.298039, 0.380392, 0.419608)
 wait_time = 1.093
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -11)
 target_position = Vector2(-203, 0)
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="weaponpoint" type="Node2D" parent="."]
+position = Vector2(-22, -14)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="HitBox" method="_on_animated_sprite_2d_animation_finished"]
