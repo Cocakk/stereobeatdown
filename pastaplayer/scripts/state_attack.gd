@@ -11,9 +11,9 @@ class_name stateAttack extends State
 @onready var attack_anim = $"../../Sprite2D/AttackEffectSprite/AnimationPlayer"
 @onready var audio : AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 @export_range (1,20,0.5) var decelerate_speed : float = 5.0
-@export var dash_speed : float = 300.0
+@export var dash_speed : float = 280.0
 var dash_duration : float = 0.2
-var dash_timer : float = 0.0
+var dash_timer : float = 0.5
 signal reload
 var attacking : bool = false
 var morto

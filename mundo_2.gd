@@ -1,11 +1,23 @@
 extends Node2D
+@onready var portal = $portal
+var nummortos : int
+@onready var transition = $transition
+@onready var player = $player
+@export var meta1 : int
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# Assumindo que transition é um AnimationPlayer
+	transition.seek(0)
+	transition.play("fadeout")
+	Morte.connect("morreu", Callable(self, "contagemdeinimigos"))
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# Remova _process se não for usar
+# func _process(delta):
+#     pass
+func contagemdeinimigos():
+	nummortos += 1
+	print("matou ", nummortos)
+	if nummortos >= meta1:
+		
+	
+		pass

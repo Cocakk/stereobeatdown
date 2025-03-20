@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dscwncf5guvgk"]
+
+[ext_resource type="Script" path="res://caboom.gd" id="1_l5rhv"]
+[ext_resource type="Texture2D" uid="uid://bc6lgy6vp5100" path="res://geral/boom.png" id="2_05em6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrv31"]
+atlas = ExtResource("2_05em6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2u6x"]
+atlas = ExtResource("2_05em6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr6qt"]
+atlas = ExtResource("2_05em6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdtux"]
+atlas = ExtResource("2_05em6")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bidtg"]
+atlas = ExtResource("2_05em6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_423iu"]
+atlas = ExtResource("2_05em6")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cfsl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrv31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2u6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr6qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdtux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bidtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_423iu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="caboom" type="Node2D"]
+script = ExtResource("1_l5rhv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3cfsl")
+frame = 5
+frame_progress = 1.0

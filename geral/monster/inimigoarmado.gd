@@ -14,7 +14,7 @@ extends CharacterBody2D
 signal morreu
 signal dano
 
-@export var attention = true
+@export var attention = false
 var playermorto = false
 var speed = 80
 @export var player : Node2D
@@ -75,6 +75,7 @@ func _physics_process(delta: float) -> void:
 			velocity *= 0.95
 		STATES.DYING:
 			velocity = Vector2.ZERO
+			anini.play("Death")
 
 	nav_agent.set_velocity(velocity)
 	move_and_slide()
@@ -122,7 +123,7 @@ func chase_player(delta: float):
 func _on_detection_area_body_entered(body):
 	if body == player and state != STATES.ATTACK and state != STATES.DYING:
 		player_in_range = true
-		if attention and state != STATES.DYING:
+		if attention == true and state != STATES.DYING:
 			state = STATES.CHASE
 	elif body.is_in_group("bullets") and body.returning:
 		queue_free()
@@ -168,13 +169,23 @@ func set_direction(is_left: bool):
 	else:
 		weapon_point.position.x = abs(weapon_point.position.x) # Ajuste a posição X para a direita
 
+
+func _on_any_enemy_died():
+	attention = true
+	if player_in_range and state != STATES.DYING:
+		print("teste b b b b b bb b bb b ")
+		state = STATES.CHASE
+
 func _on_hit_box_damaged(damage):
 	if state != STATES.DYING and !playermorto:
-		damagetaken += damage
-		Morte.emit_signal("morreu")
-		emit_signal("morreu")
 		state = STATES.DYING
 		anini.play("Death")
+		print("dano recebido 1234")
+		Morte.emit_signal("morreu")
+		emit_signal("morreu")
+
+	elif state == STATES.DYING:
+		print("não é possível morrer duas vezes")
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	if state == STATES.CHASE:
