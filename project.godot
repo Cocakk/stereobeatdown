@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Morte="*res://geral/monster/morte.gd"
+playermanager="*res://pastaplayer/scripts/playermanager.gd"
 
 [display]
 

@@ -102,14 +102,6 @@ player = NodePath("../player")
 position = Vector2(160, -1009)
 inimigos = 7
 
-[node name="Mafia" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f56rd")]
-position = Vector2(195, -654)
-player = NodePath("../player")
-
-[node name="Mafia2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f56rd")]
-position = Vector2(666, -860)
-player = NodePath("../player")
-
 [node name="Mafia3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f56rd")]
 position = Vector2(413, -50)
 player = NodePath("../player")

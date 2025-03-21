@@ -205,9 +205,7 @@ func _on_shoot_timer_timeout():
 			bullet.global_position = weapon_point.global_position
 			var direction = (player.global_position - weapon_point.global_position).normalized()
 			bullet.set_direction(direction)
-			get_parent().add_child(bullet)
-			
-			get_parent().add_child(bullet)
+			get_tree().current_scene.add_child(bullet)
 
 func debug_info():
 	print(
