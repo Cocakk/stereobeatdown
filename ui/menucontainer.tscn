@@ -1,26 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu4ujnev02qmv"]
+[gd_scene load_steps=2 format=3 uid="uid://bu4ujnev02qmv"]
 
-[ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="1_80dch"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_b8ire"]
-font = ExtResource("1_80dch")
-font_size = 56
-font_color = Color(0.858824, 0, 0.890196, 1)
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://o3tiw2bq3jbp" path="res://geral/Desenho 26 (2).png" id="1_0xlgd"]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 2.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_top = 75
 
-[node name="Label" type="Label" parent="."]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Stereo Beatdown"
-label_settings = SubResource("LabelSettings_b8ire")
+[node name="TextureRect" type="Sprite2D" parent="."]
+position = Vector2(637, 101)
+scale = Vector2(0.653199, 0.644638)
+texture = ExtResource("1_0xlgd")

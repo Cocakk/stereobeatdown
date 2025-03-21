@@ -1,11 +1,32 @@
 extends Node2D
 
-##escrever o comando que quando receber o sinal global, ele vai escolher um tipo de inimigo e invocar, NÃO ESUQEÇA
-# Called when the node enters the scene tree for the first time.
+var nummortos : int = 0
+@export var meta1 : int
+@onready var animate = $AnimatedSprite2D
+@onready var inimigo1 = preload("res://geral/monster/mushroom.tscn")
+@onready var inimigo2 = preload("res://geral/monster/mafia.tscn")
+
 func _ready():
-	pass # Replace with function body.
+	Morte.connect("morreu", Callable(self, "contagemdeinimigos"))
+	randomize()
 
+func contagemdeinimigos():
+	nummortos += 1
+	print("matooou ", nummortos)
+	if nummortos >= meta1:
+		spawn_inimigo()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func spawn_inimigo():
+	var inimigo = randi_range(1, 3)
+	var novo_inimigo
+	
+	if inimigo < 3:  # Se o número tirado for 1 ou 2, use o inimigo1
+		novo_inimigo = inimigo1.instantiate()
+		print("Spawning inimigo1")
+	else:  # Se o número for 3, use o inimigo2
+		novo_inimigo = inimigo2.instantiate()
+		print("Spawning inimigo2")
+	add_child(novo_inimigo)
+	novo_inimigo.attention = true
+	novo_inimigo.player = get_tree().get_first_node_in_group("player")
+	animate.play("default")

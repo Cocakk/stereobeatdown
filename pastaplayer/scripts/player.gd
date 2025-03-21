@@ -24,8 +24,9 @@ func _ready():
 		enemy.connect("morreu", Callable(self, "oinimigomorreu"))
 	for enemy in get_tree().get_nodes_in_group("inimigos"):
 		enemy.connect("dano", Callable(self, "levodano"))
-	
-	# Não é mais necessário conectar balas aqui, pois será feito dinamicamente
+	for bullet in get_tree().get_nodes_in_group("bullets"):
+		bullet.connect("Bala", Callable(self, "levotiro"))
+
 
 func _process(_delta):
 	direction = Vector2(
@@ -52,6 +53,8 @@ func _SetDirection() -> bool:
 	return true 
 	
 func levotiro():
+	##o player tem que morrer assim que levar o tiro, sua invencibilidade não serve para balas.
+	print("player levou tiro")
 	if direction.y <= 0 and !morto:
 		animation_player.play("morte_up")
 	elif direction.y >= 0 and !morto:
