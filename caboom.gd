@@ -13,7 +13,8 @@ func _ready():
 func contagemdeinimigos():
 	nummortos += 1
 	print("matooou ", nummortos)
-	if nummortos >= meta1:
+	if nummortos == meta1:
+		meta1 += 8
 		spawn_inimigo()
 
 func spawn_inimigo():

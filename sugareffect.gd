@@ -1,7 +1,7 @@
 extends MarginContainer
 @onready var anim = $AnimationPlayer
 
-
+var morto = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for enemy in get_tree().get_nodes_in_group("inimigos"):
@@ -9,9 +9,10 @@ func _ready():
 	pass # Replace with function body.
 
 func oinimigomorreu():
-	print("sugareffect recebe o sinal")
-	anim.stop()
-	anim.play("loadoff")
+	if morto == false:
+		print("sugareffect recebe o sinal")
+		anim.stop()
+		anim.play("loadoff")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,4 +31,17 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_drink_bebi():
 	anim.stop()
 	anim.play("loadoff")
+	pass # Replace with function body.
+
+
+func _on_player_pericles():
+	if !morto:
+		anim.stop()
+		anim.play("loadoff")
+	pass # Replace with function body.
+
+
+func _on_player_morreu():
+	anim.play("loadoff_2")
+	morto=true
 	pass # Replace with function body.

@@ -636,6 +636,8 @@ size_flags_vertical = 4
 
 [connection signal="morreu" from="." to="StateMachine/walk" method="_on_player_morreu"]
 [connection signal="morreu" from="." to="StateMachine/Attack" method="_on_player_morreu"]
+[connection signal="morreu" from="." to="sugareffect" method="_on_player_morreu"]
+[connection signal="pericles" from="." to="sugareffect" method="_on_player_pericles"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/drink" method="_on_animation_player_animation_finished"]
 [connection signal="reload" from="StateMachine/Attack" to="." method="_on_attack_reload"]

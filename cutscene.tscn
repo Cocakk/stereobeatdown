@@ -220,8 +220,8 @@ theme_override_font_sizes/italics_font_size = 19
 theme_override_font_sizes/bold_italics_font_size = 19
 theme_override_font_sizes/mono_font_size = 19
 bbcode_enabled = true
-text = "Ok, it's just how I expected. All of them are here… They think that I'm just another criminal. I need to do it fast. When I take the first one, the others will come after me. I need to stay alert about the mafia bosses; they're not like the others, they have guns.
-[color=\"yellow\"] [When the bullets come close to you, you can reflect them with the attack button. But unlike melee attacks, if just one bullet touches you, you will die instantly.] [/color]
+text = "He is just one of them, one criminal. One hit is enough to take him to hell, but if I do it, the others will notice me, and this will be a problem. But if I just drink one soda can, I will be faster and stronger than all of them combined…
+[color=\"yellow\"] [Press “E” and you will have 3 seconds of invincibility. No melee attacks will cause damage, but keep your attention and don't lose the rhythm.] [/color]
 
 
 
@@ -229,3 +229,5 @@ text = "Ok, it's just how I expected. All of them are here… They think that I'
 "
 scroll_active = false
 autowrap_mode = 2
+visible_characters = 0
+visible_ratio = 0.0

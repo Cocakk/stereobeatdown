@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="4_kjmol"]
 [ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="6_qdoqm"]
 [ext_resource type="PackedScene" uid="uid://cma7r3qh6ci2" path="res://geral/monster/mushroom.tscn" id="7_ap6mr"]
-[ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="8_jt2d5"]
 [ext_resource type="PackedScene" uid="uid://ktgh7pa1r2tp" path="res://geral/monster/mafia.tscn" id="9_f56rd"]
+[ext_resource type="PackedScene" uid="uid://c1w7tb7yqtsm4" path="res://pause.tscn" id="10_nfaep"]
 [ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="10_rcmgv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5idlt"]
@@ -98,13 +98,47 @@ scale = Vector2(1, -1)
 attention = false
 player = NodePath("../player")
 
-[node name="portal" parent="." instance=ExtResource("8_jt2d5")]
-position = Vector2(160, -1009)
-inimigos = 7
-
 [node name="Mafia3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f56rd")]
-position = Vector2(413, -50)
+position = Vector2(170, -709)
+player = NodePath("../player")
+
+[node name="Mafia4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f56rd")]
+position = Vector2(170, -709)
+player = NodePath("../player")
+
+[node name="Mafia5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f56rd")]
+position = Vector2(322, -913)
 player = NodePath("../player")
 
 [node name="caboom" parent="." instance=ExtResource("10_rcmgv")]
-position = Vector2(320, -155)
+position = Vector2(488, -550)
+meta1 = 10
+
+[node name="caboom2" parent="." instance=ExtResource("10_rcmgv")]
+position = Vector2(177, -909)
+meta1 = 10
+
+[node name="caboom3" parent="." instance=ExtResource("10_rcmgv")]
+position = Vector2(217, -663)
+meta1 = 10
+
+[node name="caboom4" parent="." instance=ExtResource("10_rcmgv")]
+position = Vector2(447, -770)
+meta1 = 10
+
+[node name="caboom5" parent="." instance=ExtResource("10_rcmgv")]
+position = Vector2(447, -770)
+meta1 = 10
+
+[node name="caboom6" parent="." instance=ExtResource("10_rcmgv")]
+position = Vector2(471, -873)
+meta1 = 10
+
+[node name="caboom7" parent="." instance=ExtResource("10_rcmgv")]
+position = Vector2(454, -678)
+meta1 = 10
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("10_nfaep")]
+z_index = 7

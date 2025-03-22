@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+var tiro = -1
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
 const DIR_4 = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
@@ -14,7 +15,10 @@ var invencivel = false
 var morto = false
 signal morreu
 signal DirectionChanged(new_direction : Vector2)
-
+signal pericles
+	
+	
+	
 func _ready():
 	state_machine.initialize(self)
 	add_to_group("player")
@@ -55,13 +59,17 @@ func _SetDirection() -> bool:
 func levotiro():
 	##o player tem que morrer assim que levar o tiro, sua invencibilidade não serve para balas.
 	print("player levou tiro")
-	if direction.y <= 0 and !morto:
-		animation_player.play("morte_up")
-	elif direction.y >= 0 and !morto:
-		animation_player.play("morte_down")
-	morto = true
-	emit_signal("morreu")
-	emit_signal("playermorreu")
+
+	if tiro == 1:
+		if direction.y <= 0 and !morto:
+			animation_player.play("morte_up")
+		elif direction.y >= 0 and !morto:
+			animation_player.play("morte_down")
+		morto = true
+		emit_signal("morreu")
+		emit_signal("playermorreu")
+	else: 
+		tiro += 1
 	
 func _UpdateAnimation ( state : String ) -> void:
 	if morto != true:
@@ -77,6 +85,7 @@ func AnimDirection () -> String:
 
 func oinimigomorreu():
 	timer.start()
+	emit_signal("pericles")
 	invencivel = true
 	print("o player recebe o sinal de morte")
 	return
@@ -110,6 +119,7 @@ func _on_animation_player_animation_finished(anim_name):
 		get_tree().change_scene_to_file("res://deathscene.tscn")
 
 func _on_drink_bebi():
+	
 	timer.start()
 	invencivel = true
 
