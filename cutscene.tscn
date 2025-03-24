@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.8, 2.4, 3.4, 3.6, 4.9, 5.6, 7.3, 7.9, 11.3, 11.6, 15),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0, 38, 38, 76, 76, 148, 148, 171, 171, 239, 239, 425]
+"values": [0, 38, 38, 76, 76, 148, 148, 171, 176, 239, 239, 425]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -175,7 +175,7 @@ _data = {
 "text": SubResource("Animation_f8v22")
 }
 
-[node name="Control" type="Control"]
+[node name="cutscene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,6 +183,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_24rxk")
+cut = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -230,5 +231,5 @@ text = "He is just one of them, one criminal. One hit is enough to take him to h
 "
 scroll_active = false
 autowrap_mode = 2
-visible_characters = 0
-visible_ratio = 0.0
+visible_characters = 76
+visible_ratio = 0.194872

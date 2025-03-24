@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfnbeyit81311"]
+[gd_scene load_steps=13 format=3 uid="uid://cfnbeyit81311"]
 
 [ext_resource type="Script" path="res://mundo_2.gd" id="1_g7u2o"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="2_x23o8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="4_kjmol"]
 [ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="6_qdoqm"]
 [ext_resource type="PackedScene" uid="uid://cma7r3qh6ci2" path="res://geral/monster/mushroom.tscn" id="7_ap6mr"]
+[ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="8_jt2d5"]
 [ext_resource type="PackedScene" uid="uid://ktgh7pa1r2tp" path="res://geral/monster/mafia.tscn" id="9_f56rd"]
 [ext_resource type="PackedScene" uid="uid://c1w7tb7yqtsm4" path="res://pause.tscn" id="10_nfaep"]
 [ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="10_rcmgv"]
@@ -143,3 +144,8 @@ meta1 = 10
 [node name="Control" parent="CanvasLayer" instance=ExtResource("10_nfaep")]
 z_index = 7
 metadata/_edit_use_anchors_ = true
+
+[node name="portal" parent="." instance=ExtResource("8_jt2d5")]
+position = Vector2(158.2, -1011.8)
+next_scene = "res://mundo_3.tscn"
+inimigos = 26

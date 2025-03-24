@@ -1,7 +1,19 @@
 extends Control
 
-###########
-#* A long time ago, all the [color="yellow"]sugar[/color] in the world was completely banned. 
-# We're talking about something like the 18th century. New economic systems were applied, 
-# and a new international agreement sealed the definitive ban on [color="yellow"]sugar[/color]. 
-#Something about its properties hindering human cognitive development.
+@onready var cutscene = $"."
+@onready var label = $AnimationPlayer/Label
+@export var cut : int
+func _input(event):
+	if Input.is_action_just_pressed("drink"):
+		cutscene.visible = false
+		label.visible = false 
+
+func _ready(): 
+	match cut:
+		1:
+			print("roblox")
+		2: 
+			print("rpg")
+		3:
+			print("idk")
+	pass

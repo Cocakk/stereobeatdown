@@ -25,7 +25,7 @@ var damagetaken = 0
 var last_direction_x = 0
 
 # Sistema de rajadas
-@export var burst_size := 3
+@export var burst_size := 20
 @export var burst_cooldown := 2.0
 var shots_fired := 0
 var is_in_cooldown := false

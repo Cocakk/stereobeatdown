@@ -48,7 +48,7 @@ meta1 = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("2_ss5qn")]
+[node name="cutscene" parent="CanvasLayer" instance=ExtResource("2_ss5qn")]
 z_index = 7
 metadata/_edit_use_anchors_ = true
 
