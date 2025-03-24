@@ -18,7 +18,7 @@ func _process(delta):
 		label.text = "Progress saved!"
 		var config = ConfigFile.new()
 		config.set_value("Scenes", "Name", get_tree().current_scene.scene_file_path)
-		config.save_encrypted_pass("res://save/scenes.cfg", key)
+		config.save_encrypted_pass("user://scenes.cfg", key)
 		print("salvo")
 	
 	

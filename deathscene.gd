@@ -13,7 +13,7 @@ func _process(delta):
 
 func _on_button_pressed():
 	var config = ConfigFile.new()
-	var err = config.load_encrypted_pass("res://save/scenes.cfg", key)
+	var err = config.load_encrypted_pass("user://scenes.cfg", key)
 	print("aqui ta funcionando")
 	if err == OK:
 		print("o err ta ok")

@@ -5,17 +5,22 @@ var nummortos : int = 0
 @onready var animate = $AnimatedSprite2D
 @onready var inimigo1 = preload("res://geral/monster/mushroom.tscn")
 @onready var inimigo2 = preload("res://geral/monster/mafia.tscn")
+signal door
+
 
 func _ready():
 	Morte.connect("morreu", Callable(self, "contagemdeinimigos"))
 	randomize()
 
 func contagemdeinimigos():
+	randomize()
 	nummortos += 1
 	print("matooou ", nummortos)
-	if nummortos == meta1:
-		meta1 += 8
+	if nummortos == meta1 and nummortos <= 26:
+		meta1 += 7
 		spawn_inimigo()
+	elif nummortos >= 26:
+		emit_signal("door")
 
 func spawn_inimigo():
 	var inimigo = randi_range(1, 3)

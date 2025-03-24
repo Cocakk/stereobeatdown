@@ -21,7 +21,7 @@ func _on_jogar_pressed():
 
 func _on_button_pressed(): ##botão de load
 	var config = ConfigFile.new()
-	var err = config.load_encrypted_pass("res://save/scenes.cfg", key)
+	var err = config.load_encrypted_pass("user://scenes.cfg", key)
 	print("aqui ta funcionando")
 	if err == OK:
 		print("o err ta ok")
@@ -42,7 +42,7 @@ func _on_button_2_pressed():
 	var config = ConfigFile.new()
 	var reloadgame = "res://mundo.tscn"
 	config.set_value("Scenes", "Name", reloadgame)
-	config.save_encrypted_pass("res://save/scenes.cfg", key)
+	config.save_encrypted_pass("user://scenes.cfg", key)
 	get_tree().change_scene_to_file("res://mundo.tscn")
 	
 	

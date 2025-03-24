@@ -142,3 +142,4 @@ meta1 = 10
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("10_nfaep")]
 z_index = 7
+metadata/_edit_use_anchors_ = true
