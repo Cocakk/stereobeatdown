@@ -1,4 +1,5 @@
 extends Control
+@onready var animar = $AnimationPlayer
 
 @onready var cutscene = $"."
 @onready var label = $AnimationPlayer/Label
@@ -8,12 +9,4 @@ func _input(event):
 		cutscene.visible = false
 		label.visible = false 
 
-func _ready(): 
-	match cut:
-		1:
-			print("roblox")
-		2: 
-			print("rpg")
-		3:
-			print("idk")
-	pass
+
