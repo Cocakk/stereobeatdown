@@ -1,3 +1,4 @@
+
 extends CharacterBody2D
 @onready var timer = $Timer
 
@@ -12,7 +13,7 @@ extends CharacterBody2D
 @onready var bullet_scene = preload("res://geral/bullet/bullet.tscn")
 @onready var weapon_point = $weaponpoint
 @onready var burst_cooldown_timer = $BurstCoooldownTimer
-
+var danorecebido = 0
 
 signal morreu
 signal dano
@@ -26,11 +27,11 @@ var last_direction_x = 0
 
 # Sistema de rajadas
 @export var burst_size := 20
-@export var burst_cooldown := 2.0
+@export var burst_cooldown := 5.0
 var shots_fired := 0
 var is_in_cooldown := false
 
-enum STATES { IDLE, CHASE, ATTACK, DYING }
+enum STATES { IDLE, CHASE, ATTACK, DYING, TRANSITION }
 var state : STATES = STATES.IDLE
 
 var podebate = false
@@ -62,7 +63,9 @@ func _ready():
 		player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta: float) -> void:
-	if not attention and not can_detect_player:
+
+
+	if not attention and not can_detect_player and state != STATES.TRANSITION:
 		state = STATES.IDLE
 		velocity = Vector2.ZERO
 		anini.play("idle")
@@ -82,10 +85,17 @@ func _physics_process(delta: float) -> void:
 		STATES.CHASE:
 			chase_player(delta)
 		STATES.ATTACK:
-			velocity *= 0.95
+			velocity = Vector2.ZERO
+			# Mantém a direção atualizada mesmo parado
+			var target_direction = sign(player.global_position.x - global_position.x)
+			set_direction(target_direction < 0)
 		STATES.DYING:
 			velocity = Vector2.ZERO
 			anini.play("Death")
+		STATES.TRANSITION:
+			print("dor de cabeça")
+			velocity = Vector2.ZERO
+			anini.play("transition")
 
 	nav_agent.set_velocity(velocity)
 	move_and_slide()
@@ -133,6 +143,8 @@ func _on_detection_area_body_entered(body):
 	elif body.is_in_group("bullets") and body.returning:
 		queue_free()
 		
+		
+	
 func _on_prox_body_entered(body):
 	if body == player:
 		podebate = true
@@ -154,11 +166,22 @@ func _on_animated_sprite_2d_animation_finished():
 	elif anini.animation == "attacking":
 		attackcooldown = true
 		timer_2.start()
-		if player_in_range:
-			state = STATES.CHASE
-		else:
-			state = STATES.IDLE
+		state = STATES.CHASE if player_in_range else STATES.IDLE
+	elif anini.animation == "transition":
+		attention = true
+		state = STATES.CHASE
+		update_timer = 0.0
+		shots_fired = 0
+		is_in_cooldown = false
 
+func _input(event):
+	if Input.is_action_just_pressed("drink"):
+		print("glub glub")
+		if attention == false:
+			state = STATES.TRANSITION
+			_physics_process(get_physics_process_delta_time())
+
+	
 func _on_timer_2_timeout():
 	attackcooldown = false
 	timer_2.stop()
@@ -168,11 +191,12 @@ func _on_timer_2_timeout():
 		emit_signal("dano")
 
 func set_direction(is_left: bool):
-	anini.scale.x = -1 if is_left else 1
-	if is_left:
-		weapon_point.position.x = -abs(weapon_point.position.x)
-	else:
-		weapon_point.position.x = abs(weapon_point.position.x)
+	if anini.scale.x != (-1 if is_left else 1):  # Só atualiza se mudar de direção
+		anini.scale.x = -1 if is_left else 1
+		if is_left:
+			weapon_point.position.x = -abs(weapon_point.position.x)
+		else:
+			weapon_point.position.x = abs(weapon_point.position.x)
 
 func _on_any_enemy_died():
 	attention = true
@@ -181,10 +205,15 @@ func _on_any_enemy_died():
 
 func _on_hit_box_damaged(damage):
 	if state != STATES.DYING and !playermorto:
-		state = STATES.DYING
-		anini.play("Death")
-		Morte.emit_signal("morreu")
-		emit_signal("morreu")
+		if danorecebido >= 20:
+			state = STATES.DYING
+			anini.play("Death")
+			Morte.emit_signal("morreu")
+			emit_signal("morreu")
+		else:
+			Morte.emit_signal("morreu")
+			emit_signal("morreu")
+			danorecebido += 2
 	elif state == STATES.DYING:
 		print("não é possível morrer duas vezes")
 
@@ -198,6 +227,11 @@ func _on_shoot_timer_timeout():
 		ray_cast_2d.force_raycast_update()
 
 		if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
+			# Atualiza direção antes de atirar
+			var target_direction = sign(player.global_position.x - global_position.x)
+			set_direction(target_direction < 0)
+			
+			state = STATES.ATTACK
 			anini.play("attacking")
 			var bullet = bullet_scene.instantiate()
 			bullet.global_position = weapon_point.global_position

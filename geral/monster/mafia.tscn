@@ -270,10 +270,8 @@ shape = SubResource("CircleShape2D_q8gub")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_m03vw")
-animation = &"Death"
+animation = &"attacking"
 autoplay = "idle"
-frame = 7
-frame_progress = 1.0
 
 [node name="HitBox" parent="." instance=ExtResource("5_trbm3")]
 visible = false

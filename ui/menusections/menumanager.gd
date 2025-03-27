@@ -43,7 +43,7 @@ func _on_button_2_pressed():
 	var reloadgame = "res://mundo.tscn"
 	config.set_value("Scenes", "Name", reloadgame)
 	config.save_encrypted_pass("user://scenes.cfg", key)
-	get_tree().change_scene_to_file("res://mundo.tscn")
+	get_tree().change_scene_to_file("res://cutscene.tscn")
 	
 	
 	pass # Replace with function body.

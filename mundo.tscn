@@ -7,7 +7,7 @@
 [ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="3_xduh6"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="5_ybsgh"]
 [ext_resource type="PackedScene" uid="uid://bqka7mk4q2fqd" path="res://props/portal.tscn" id="6_lxeoh"]
-[ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="9_6x2iv"]
+[ext_resource type="PackedScene" uid="uid://c4xy54q18hsch" path="res://cutscene.tscn" id="9_l4mds"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qe8s0"]
 resource_local_to_scene = true
@@ -21,37 +21,48 @@ position = Vector2(172, 112)
 script = ExtResource("1_cm6j6")
 
 [node name="Mushroom" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(609, -28)
+position = Vector2(628, -28)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
+speed = 80
 player = NodePath("../player")
 
 [node name="Mushroom6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(502, -28)
+position = Vector2(493, 33)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
+speed = 80
 player = NodePath("../player")
 
 [node name="Mushroom2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(408, -77)
+position = Vector2(395, -33)
 scale = Vector2(-1, 1)
+attention = false
+speed = 80
 player = NodePath("../player")
 
 [node name="Mushroom3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(518, -85)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
+speed = 80
 player = NodePath("../player")
 
 [node name="Mushroom4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
 position = Vector2(441, 3)
 scale = Vector2(-1, 1)
+speed = 80
 player = NodePath("../player")
 
 [node name="Mushroom5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_48byf")]
-position = Vector2(580, -81)
+position = Vector2(638, -100)
 scale = Vector2(-1, 1)
 face_left = false
+attention = false
+speed = 80
 player = NodePath("../player")
 
 [node name="player" parent="." instance=ExtResource("1_g0ifi")]
@@ -84,6 +95,19 @@ layer_2/name = "decoração"
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(65502, 1638400, 8, -34, 1638400, 8, 65507, 1638400, 8, -29, 1638400, 8, -27, 1638400, 8, 65509, 1638400, 8, -31, 1638400, 8, 65505, 1638400, 8, -25, 1638400, 8, 65511, 1638400, 8, -65497, 1638400, 8, 39, 1638400, 8, -65498, 1638400, 8, 38, 1638400, 8, -65499, 1638400, 8, 37, 1638400, 8)
 
-[node name="transition" parent="." instance=ExtResource("9_6x2iv")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[connection signal="animation_finished" from="transition" to="portal" method="_on_transition_animation_finished"]
+[node name="Control" parent="CanvasLayer" instance=ExtResource("9_l4mds")]
+offset_left = 168.0
+offset_top = 111.0
+offset_right = 168.0
+offset_bottom = 111.0
+cut = 1
+
+[node name="CollisionShape2D" parent="CanvasLayer/Control/Area2D" index="0"]
+position = Vector2(349, 156)
+
+[node name="Label" parent="CanvasLayer/Control/AnimationPlayer" index="1"]
+visible = false
+
+[editable path="CanvasLayer/Control"]

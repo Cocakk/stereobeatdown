@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cfnbeyit81311"]
+[gd_scene load_steps=16 format=3 uid="uid://cfnbeyit81311"]
 
 [ext_resource type="Script" path="res://mundo_2.gd" id="1_g7u2o"]
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="2_x23o8"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://ktgh7pa1r2tp" path="res://geral/monster/mafia.tscn" id="9_f56rd"]
 [ext_resource type="PackedScene" uid="uid://c1w7tb7yqtsm4" path="res://pause.tscn" id="10_nfaep"]
 [ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="10_rcmgv"]
+[ext_resource type="PackedScene" uid="uid://c4xy54q18hsch" path="res://cutscene.tscn" id="11_m1pgo"]
+[ext_resource type="AudioStream" uid="uid://348b6ajk16dd" path="res://Combate Versão loop.mp3" id="13_ku2ok"]
+[ext_resource type="Script" path="res://AudioStreamPlayer2D.gd" id="14_vrdft"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5idlt"]
 resource_local_to_scene = true
@@ -145,7 +148,24 @@ meta1 = 10
 z_index = 7
 metadata/_edit_use_anchors_ = true
 
+[node name="cutscene" parent="CanvasLayer" instance=ExtResource("11_m1pgo")]
+cut = 2
+
+[node name="CollisionShape2D" parent="CanvasLayer/cutscene/Area2D" index="0"]
+position = Vector2(274, -499)
+
+[node name="Label" parent="CanvasLayer/cutscene/AnimationPlayer" index="1"]
+visible = false
+
 [node name="portal" parent="." instance=ExtResource("8_jt2d5")]
-position = Vector2(158.2, -1011.8)
+position = Vector2(155, -1010)
 next_scene = "res://mundo_3.tscn"
 inimigos = 26
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-3, -38)
+stream = ExtResource("13_ku2ok")
+script = ExtResource("14_vrdft")
+inimigosmax = 26
+
+[editable path="CanvasLayer/cutscene"]

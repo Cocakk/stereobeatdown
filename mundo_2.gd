@@ -1,9 +1,10 @@
 extends Node2D
 @onready var portal = $portal
 var nummortos : int
-@onready var transition = $transition
+
 @onready var player = $player
 @export var meta1 : int
+@onready var transition = $transition
 
 func _ready():
 

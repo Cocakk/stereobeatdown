@@ -15,7 +15,7 @@ signal dano
 
 var playermorto = false
 
-var speed = 120
+@export var speed = 120
 @export var player : Node2D
 var damagetaken = 0
 var state = "idle"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6kjfuf0w25u0"]
+[gd_scene load_steps=14 format=3 uid="uid://b6kjfuf0w25u0"]
 
 [ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="1_a7jhx"]
 [ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="1_rne85"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="4_k14y6"]
 [ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="5_h16p4"]
 [ext_resource type="PackedScene" uid="uid://5qbycj1a1wbf" path="res://geral/monster/jorge.tscn" id="8_e31gd"]
+[ext_resource type="AudioStream" uid="uid://cu0r2mblxp6vy" path="res://geral/monster/Boss music.mp3" id="10_rveqp"]
+[ext_resource type="Script" path="res://AudioStreamPlayer2D.gd" id="11_cswiy"]
+[ext_resource type="PackedScene" uid="uid://blor338ddcos8" path="res://explosion.tscn" id="12_xti3x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5l545"]
 resource_local_to_scene = true
@@ -17,6 +20,7 @@ shader_parameter/flash_color = Color(1, 0, 0.407843, 1)
 shader_parameter/flash_modifier = 0.7
 
 [node name="mundo_3" type="Node2D"]
+y_sort_enabled = true
 
 [node name="caboom" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(297, -283)
@@ -24,27 +28,27 @@ meta1 = 10
 
 [node name="caboom2" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(-101, -386)
-meta1 = 10
+meta1 = 5
 
 [node name="caboom3" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(-61, -140)
-meta1 = 10
+meta1 = 3
 
 [node name="caboom4" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(169, -247)
-meta1 = 10
+meta1 = 3
 
 [node name="caboom5" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(169, -247)
-meta1 = 10
+meta1 = 3
 
 [node name="caboom6" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(193, -350)
-meta1 = 10
+meta1 = 3
 
 [node name="caboom7" parent="." instance=ExtResource("1_rne85")]
 position = Vector2(176, -155)
-meta1 = 10
+meta1 = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -53,6 +57,10 @@ z_index = 7
 metadata/_edit_use_anchors_ = true
 
 [node name="Control2" parent="CanvasLayer" instance=ExtResource("3_klmrh")]
+cut = 4
+
+[node name="CollisionShape2D" parent="CanvasLayer/Control2/Area2D" index="0"]
+position = Vector2(91.5, -288)
 
 [node name="savepoint" parent="." instance=ExtResource("1_a7jhx")]
 position = Vector2(482, -106)
@@ -80,4 +88,43 @@ layer_3/tile_data = PackedInt32Array(-458773, 131075, 6, -393237, 131075, 6, -32
 [node name="transition" parent="." instance=ExtResource("5_h16p4")]
 
 [node name="Jorge" parent="." instance=ExtResource("8_e31gd")]
-position = Vector2(68, -434)
+position = Vector2(70, -406)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_rveqp")
+script = ExtResource("11_cswiy")
+inimigosmax = 30
+
+[node name="explosion" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(-32, -329)
+
+[node name="explosion2" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(83, -329)
+
+[node name="explosion3" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(205, -336)
+
+[node name="explosion4" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(205, -240)
+
+[node name="explosion5" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(118, -237)
+
+[node name="explosion6" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(4, -236)
+
+[node name="explosion7" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(-92, -232)
+
+[node name="explosion8" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(-92, -284)
+
+[node name="explosion9" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(-86, -369)
+
+[node name="explosion10" parent="." instance=ExtResource("12_xti3x")]
+position = Vector2(321, -368)
+
+[connection signal="morreu" from="Jorge" to="AudioStreamPlayer2D" method="_on_jorge_morreu"]
+
+[editable path="CanvasLayer/Control2"]

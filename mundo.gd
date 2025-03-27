@@ -1,13 +1,12 @@
 extends Node2D
 
-@onready var transition = $transition
+@onready var transition = $CanvasLayer/transition
 @onready var player = $player
 
 func _ready():
 	# Assumindo que transition é um AnimationPlayer
-	transition.seek(0)
-	transition.play("fadeout")
-
+	
+	pass
 	# Se você quiser definir a posição do nó de transição
 
 
