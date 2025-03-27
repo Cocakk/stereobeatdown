@@ -88,6 +88,7 @@ layer_3/tile_data = PackedInt32Array(-458773, 131075, 6, -393237, 131075, 6, -32
 [node name="transition" parent="." instance=ExtResource("5_h16p4")]
 
 [node name="Jorge" parent="." instance=ExtResource("8_e31gd")]
+z_index = 1
 position = Vector2(70, -406)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -95,7 +96,7 @@ stream = ExtResource("10_rveqp")
 script = ExtResource("11_cswiy")
 inimigosmax = 30
 
-[node name="explosion" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion" parent="." groups=["explosivo"] instance=ExtResource("12_xti3x")]
 position = Vector2(-32, -329)
 
 [node name="explosion2" parent="." instance=ExtResource("12_xti3x")]

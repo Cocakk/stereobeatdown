@@ -317,7 +317,7 @@ target_position = Vector2(-203, 0)
 wait_time = 0.5
 
 [node name="weaponpoint" type="Node2D" parent="."]
-position = Vector2(-51, -2)
+position = Vector2(-48, -2)
 
 [node name="BurstCoooldownTimer" type="Timer" parent="."]
 

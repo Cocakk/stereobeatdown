@@ -6,6 +6,7 @@ var morto = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Morte.connect("morreu", Callable(self, "_on_any_enemy_died"))
+	connect("explosion", get_tree().get_first_node_in_group("player").levotiro)
 	randomize()
 
 func _on_any_enemy_died():
@@ -26,5 +27,6 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_body_entered(body):
 	if body.name == "player":
+		print("a minha arte é uma EXPLOSÃO")
 		emit_signal("explosion")
 	pass # Replace with function body.

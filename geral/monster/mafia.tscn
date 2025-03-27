@@ -257,6 +257,7 @@ height = 14.0
 radius = 286.531
 
 [node name="Mafia" type="CharacterBody2D" groups=["inimigos"]]
+z_index = 1
 collision_mask = 16
 motion_mode = 1
 wall_min_slide_angle = 0.0

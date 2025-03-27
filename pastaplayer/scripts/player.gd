@@ -30,7 +30,9 @@ func _ready():
 		enemy.connect("dano", Callable(self, "levodano"))
 	for bullet in get_tree().get_nodes_in_group("bullets"):
 		bullet.connect("Bala", Callable(self, "levotiro"))
-
+	for explosion in get_tree().get_nodes_in_group("explosivo"):
+		explosion.connect("explosion", Callable(self, "levotiro"))
+	
 
 func _process(_delta):
 	direction = Vector2(
