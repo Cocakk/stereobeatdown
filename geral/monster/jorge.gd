@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var bullet_scene = preload("res://geral/bullet/bullet.tscn")
 @onready var weapon_point = $weaponpoint
 @onready var burst_cooldown_timer = $BurstCoooldownTimer
+signal permadeath
 var danorecebido = 0
 
 signal morreu
@@ -157,6 +158,7 @@ func _on_prox_body_exited(body):
 
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
+		emit_signal("permadeath")
 		queue_free()
 	elif anini.animation == "damage":
 		if player_in_range:

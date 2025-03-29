@@ -4,6 +4,7 @@ extends StaticBody2D
 @export var inimigos : int
 @onready var portaabrida = $Sprite2D
 @onready var portafechada = $Sprite2D2
+@export var combat : AudioStreamPlayer2D
 
 
 
@@ -21,7 +22,8 @@ func _process(delta):
 func contagemdeinimigos():
 	inimigosmortos += 1
 	print("morreram: ", inimigosmortos)
-	
+	if inimigosmortos == 1 and combat != null:
+		combat.play()
 	if inimigosmortos >= inimigos and portafechada.visible == true:
 		portafechada.visible = false
 		portaabrida.visible == true

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctetxw82ki8av"]
+[gd_scene load_steps=6 format=3 uid="uid://ctetxw82ki8av"]
 
 [ext_resource type="Script" path="res://ui/menusections/menumanager.gd" id="1_5a30s"]
 [ext_resource type="PackedScene" uid="uid://baju1ebypxyvq" path="res://ui/menusections/menu2.tscn" id="1_gdvrm"]
 [ext_resource type="PackedScene" uid="uid://3gwlceicy4du" path="res://ui/menusections/menu.tscn" id="2_tokal"]
 [ext_resource type="AudioStream" uid="uid://dnbsxu28na37w" path="res://mainmenu.wav" id="4_sp6gr"]
+[ext_resource type="FontFile" uid="uid://dja4lqa018ujs" path="res://fonts/Texto/falas/Tiny5-Regular.ttf" id="5_xw1ke"]
 
 [node name="Menumanager" type="Node"]
 script = ExtResource("1_5a30s")
@@ -37,12 +38,28 @@ text = "Quit
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_sp6gr")
+volume_db = -29.495
 autoplay = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 5.0
+offset_top = 531.0
+offset_right = 257.0
+offset_bottom = 663.0
+scale = Vector2(1.16, 1)
+theme_override_fonts/normal_font = ExtResource("5_xw1ke")
+bbcode_enabled = true
+text = "[color=\"yellow\"]Songs by:[/color] markc_cursed
+				  Composiia
+[color=\"green\"]Characters design by:[/color] AnaBia
+[color=\"purple\"]Code by:[/color] Pedro Elias (cocakk)"
 
 [connection signal="pressed" from="Control/texture/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Control/texture/MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Control/texture/MarginContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="texture/MarginContainer/VBoxContainer/Jogar" to="." method="_on_jogar_pressed"]
+[connection signal="pressed" from="texture/MarginContainer/VBoxContainer/Opcao" to="." method="_on_opcao_pressed"]
 [connection signal="pressed" from="texture/MarginContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]
 
 [editable path="Control"]

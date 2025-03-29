@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://yr6iimh044f"]
+[gd_scene load_steps=12 format=3 uid="uid://yr6iimh044f"]
 
 [ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="1_5bpu1"]
 [ext_resource type="Script" path="res://deathscene.gd" id="1_kbnd3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ddaohxnjfgr24" path="res://ui/botão.tscn" id="4_f2v3d"]
 [ext_resource type="Shader" path="res://neve.gdshader" id="5_431xm"]
 [ext_resource type="PackedScene" uid="uid://bu4ujnev02qmv" path="res://ui/menucontainer.tscn" id="5_eic4t"]
+[ext_resource type="AudioStream" uid="uid://cbm8ia07kgry2" path="res://cronofobia-177054.mp3" id="8_60dw7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sfdd2"]
 font = ExtResource("1_5bpu1")
@@ -97,6 +98,11 @@ text = "Last Save"
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Main Menu"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_60dw7")
+volume_db = -10.097
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

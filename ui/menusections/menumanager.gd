@@ -1,4 +1,5 @@
 extends Node
+@onready var rich_text_label = $RichTextLabel
 
 @onready var control = $Control
 var savedscene
@@ -51,4 +52,9 @@ func _on_button_2_pressed():
 
 func _on_sair_pressed():
 	get_tree().quit()
+	pass # Replace with function body.
+
+
+func _on_opcao_pressed():
+	rich_text_label.visible = true
 	pass # Replace with function body.
