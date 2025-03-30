@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b46g01mgq4s15"]
+[gd_scene load_steps=16 format=3 uid="uid://b46g01mgq4s15"]
 
 [ext_resource type="Script" path="res://mundo.gd" id="1_cm6j6"]
 [ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="1_g0ifi"]
@@ -10,12 +10,63 @@
 [ext_resource type="AudioStream" uid="uid://qlhxg06kpq3q" path="res://espiritos-do-desespero-195665.mp3" id="7_l5atu"]
 [ext_resource type="PackedScene" uid="uid://c4xy54q18hsch" path="res://cutscene.tscn" id="9_l4mds"]
 [ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="10_xk3sn"]
+[ext_resource type="Texture2D" uid="uid://c5mvjxnmsk6pb" path="res://tilemaps/CP_V1.1.0_nyknck/CP_V1.0.4_nyknck/CP_V1.0.4.png" id="11_gwh82"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qe8s0"]
 resource_local_to_scene = true
 shader = ExtResource("3_xduh6")
 shader_parameter/flash_color = Color(1, 0, 0.407843, 1)
 shader_parameter/flash_modifier = 0.7
+
+[sub_resource type="Animation" id="Animation_2yx3v"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1780, 297), Vector2(-684, 286)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2228, 219), Vector2(-241, 205)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody2D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1663, 210), Vector2(-900, 202)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iyaeb"]
+_data = {
+"new_animation": SubResource("Animation_2yx3v")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvv6d"]
+atlas = ExtResource("11_gwh82")
+region = Rect2(128, 448, 48, 32)
 
 [node name="mundo" type="Node2D"]
 y_sort_enabled = true
@@ -76,6 +127,8 @@ position = Vector2(7, 146)
 position = Vector2(217, 94)
 
 [node name="portal" parent="." node_paths=PackedStringArray("combat") instance=ExtResource("6_lxeoh")]
+visible = false
+z_index = -1
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(739, 131)
@@ -107,7 +160,7 @@ offset_bottom = 121.0
 cut = 1
 
 [node name="CollisionShape2D" parent="CanvasLayer/Control/Area2D" index="0"]
-position = Vector2(349, 156)
+position = Vector2(485, 140.563)
 
 [node name="Label" parent="CanvasLayer/Control/AnimationPlayer" index="1"]
 visible = false
@@ -156,5 +209,34 @@ meta1 = 6
 soma = 5
 au = 1
 limite = 15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iyaeb")
+}
+autoplay = "new_animation"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(278.175, 290.295)
+scale = Vector2(3.20798, 3.00703)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = SubResource("AtlasTexture_tvv6d")
+
+[node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
+position = Vector2(723.128, 210.467)
+scale = Vector2(3.20798, 3.00703)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D2"]
+position = Vector2(-124.377, -0.997661)
+texture = SubResource("AtlasTexture_tvv6d")
+
+[node name="CharacterBody2D3" type="CharacterBody2D" parent="."]
+position = Vector2(135.345, 205.232)
+scale = Vector2(3.20798, 3.00703)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D3"]
+position = Vector2(-124.377, -0.997661)
+texture = SubResource("AtlasTexture_tvv6d")
 
 [editable path="CanvasLayer/Control"]
