@@ -62,6 +62,9 @@ cut = 4
 [node name="CollisionShape2D" parent="CanvasLayer/Control2/Area2D" index="0"]
 position = Vector2(91.5, -288)
 
+[node name="Label" parent="CanvasLayer/Control2/AnimationPlayer" index="1"]
+theme_override_font_sizes/normal_font_size = 31
+
 [node name="savepoint" parent="." instance=ExtResource("1_a7jhx")]
 position = Vector2(482, -106)
 
@@ -128,6 +131,7 @@ position = Vector2(-86, -369)
 [node name="explosion10" parent="." instance=ExtResource("12_xti3x")]
 position = Vector2(321, -368)
 
+[connection signal="animation_finished" from="CanvasLayer/Control2/AnimationPlayer" to="AudioStreamPlayer2D" method="_on_animation_player_animation_finished"]
 [connection signal="morreu" from="Jorge" to="AudioStreamPlayer2D" method="_on_jorge_morreu"]
 
 [editable path="CanvasLayer/Control2"]
