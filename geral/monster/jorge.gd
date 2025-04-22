@@ -159,6 +159,7 @@ func _on_prox_body_exited(body):
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
 		emit_signal("permadeath")
+		anini.pause()
 		
 	elif anini.animation == "damage":
 		if player_in_range:

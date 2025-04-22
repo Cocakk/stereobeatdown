@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqmel63t6uhba"]
+
+[ext_resource type="Texture2D" uid="uid://bvgsu2gg7m1bs" path="res://geral/VFX Blood Concepts FXOnly1.png" id="1_wgevd"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_nb20a"]
+
+[node name="sangue" type="Sprite2D"]
+texture = ExtResource("1_wgevd")
+hframes = 2
+vframes = 2
+script = ExtResource("2_nb20a")
