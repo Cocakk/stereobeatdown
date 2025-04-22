@@ -1,112 +1,62 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6kjfuf0w25u0"]
+[gd_scene load_steps=14 format=3 uid="uid://c3bs4rcuamv4t"]
 
-[ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="1_a7jhx"]
-[ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="1_rne85"]
-[ext_resource type="PackedScene" uid="uid://c1w7tb7yqtsm4" path="res://pause.tscn" id="2_ss5qn"]
-[ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="2_vphj2"]
-[ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="3_2t8te"]
-[ext_resource type="PackedScene" uid="uid://c4xy54q18hsch" path="res://cutscene.tscn" id="3_klmrh"]
-[ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="4_k14y6"]
-[ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="5_h16p4"]
-[ext_resource type="PackedScene" uid="uid://5qbycj1a1wbf" path="res://geral/monster/jorge.tscn" id="8_e31gd"]
-[ext_resource type="AudioStream" uid="uid://cu0r2mblxp6vy" path="res://geral/monster/Boss music.mp3" id="10_rveqp"]
-[ext_resource type="Script" path="res://AudioStreamPlayer2D.gd" id="11_cswiy"]
-[ext_resource type="PackedScene" uid="uid://blor338ddcos8" path="res://explosion.tscn" id="12_xti3x"]
-[ext_resource type="Script" path="res://policia.gd" id="13_wax4u"]
+[ext_resource type="PackedScene" uid="uid://dscwncf5guvgk" path="res://caboom.tscn" id="1_06kq2"]
+[ext_resource type="PackedScene" uid="uid://c1w7tb7yqtsm4" path="res://pause.tscn" id="2_vbdfo"]
+[ext_resource type="PackedScene" uid="uid://c4xy54q18hsch" path="res://cutscene.tscn" id="3_u86fw"]
+[ext_resource type="PackedScene" uid="uid://cowxuexkcbhm7" path="res://props/savepoint.tscn" id="4_kigeq"]
+[ext_resource type="PackedScene" uid="uid://b0mt6vx6w303n" path="res://pastaplayer/player.tscn" id="5_r8svt"]
+[ext_resource type="Shader" path="res://pastaplayer/player.gdshader" id="6_855u6"]
+[ext_resource type="PackedScene" uid="uid://y60nfc75xi4c" path="res://tilemaps/spr_tile_itch.tscn" id="7_g3vyv"]
+[ext_resource type="PackedScene" uid="uid://cg7l5w7pggtsy" path="res://transition.tscn" id="8_4my0f"]
+[ext_resource type="PackedScene" uid="uid://5qbycj1a1wbf" path="res://geral/monster/jorge.tscn" id="9_v5qxn"]
+[ext_resource type="AudioStream" uid="uid://cu0r2mblxp6vy" path="res://geral/monster/Boss music.mp3" id="10_11jdh"]
+[ext_resource type="Script" path="res://AudioStreamPlayer2D.gd" id="11_aakxm"]
+[ext_resource type="PackedScene" uid="uid://blor338ddcos8" path="res://explosion.tscn" id="12_8d0w4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5l545"]
 resource_local_to_scene = true
-shader = ExtResource("3_2t8te")
+shader = ExtResource("6_855u6")
 shader_parameter/flash_color = Color(1, 0, 0.407843, 1)
 shader_parameter/flash_modifier = 0.7
 
-[sub_resource type="Animation" id="Animation_xxom1"]
-resource_name = "nada"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../CanvasLayer2:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_ccg7d"]
-resource_name = "nada_2"
-length = 6.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../CanvasLayer2:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../CanvasLayer2/TextureRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.9, 2.5, 3, 3.7, 4.3, 4.9, 5.5, 6, 6.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 1, 0.639216), Color(0.92549, 0, 0.0509804, 0.572549), Color(0, 0.231373, 0.8, 0.572549), Color(0.615686, 0, 0.0392157, 0.572549), Color(0.329412, 0, 0.827451, 0.572549), Color(0.552941, 0, 0.0862745, 0.627451), Color(0.278431, 0, 0.760784, 0.627451), Color(0.561188, 0, 0.189274, 0.572549), Color(0.366682, 0, 0.582412, 0.610316), Color(0.380392, 0, 0.0588235, 0.741176), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nlk7k"]
-_data = {
-"nada": SubResource("Animation_xxom1"),
-"nada_2": SubResource("Animation_ccg7d")
-}
-
-[node name="mundo_3" type="Node2D"]
+[node name="mundo_4" type="Node2D"]
 y_sort_enabled = true
 
-[node name="caboom" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(297, -283)
 meta1 = 10
 
-[node name="caboom2" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom2" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(-101, -386)
 meta1 = 5
 
-[node name="caboom3" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom3" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(-61, -140)
 meta1 = 3
 
-[node name="caboom4" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom4" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(169, -247)
 meta1 = 3
 
-[node name="caboom5" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom5" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(169, -247)
 meta1 = 3
 
-[node name="caboom6" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom6" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(193, -350)
 meta1 = 3
 
-[node name="caboom7" parent="." instance=ExtResource("1_rne85")]
+[node name="caboom7" parent="." instance=ExtResource("1_06kq2")]
 position = Vector2(176, -155)
 meta1 = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="cutscene" parent="CanvasLayer" instance=ExtResource("2_ss5qn")]
+[node name="cutscene" parent="CanvasLayer" instance=ExtResource("2_vbdfo")]
 z_index = 7
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" parent="CanvasLayer" instance=ExtResource("3_klmrh")]
+[node name="Control2" parent="CanvasLayer" instance=ExtResource("3_u86fw")]
 cut = 4
 
 [node name="CollisionShape2D" parent="CanvasLayer/Control2/Area2D" index="0"]
@@ -115,16 +65,16 @@ position = Vector2(91.5, -288)
 [node name="Label" parent="CanvasLayer/Control2/AnimationPlayer" index="1"]
 theme_override_font_sizes/normal_font_size = 31
 
-[node name="savepoint" parent="." instance=ExtResource("1_a7jhx")]
+[node name="savepoint" parent="." instance=ExtResource("4_kigeq")]
 position = Vector2(482, -106)
 
-[node name="player" parent="." instance=ExtResource("2_vphj2")]
+[node name="player" parent="." instance=ExtResource("5_r8svt")]
 z_index = 1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_5l545")
 position = Vector2(483, 9)
 
-[node name="SprTile01" parent="." instance=ExtResource("4_k14y6")]
+[node name="SprTile01" parent="." instance=ExtResource("7_g3vyv")]
 position = Vector2(468, 101)
 scale = Vector2(1.5, 1.5)
 layer_0/name = "chao"
@@ -140,72 +90,48 @@ layer_3/name = "paredes"
 layer_3/z_index = 2
 layer_3/tile_data = PackedInt32Array(-458773, 131075, 6, -393237, 131075, 6, -327701, 131075, 6, -262165, 131075, 6, -196629, 131075, 6, -131093, 196611, 7, -196606, 262147, 7, -262142, 3, 6, -327678, 3, 6, -393214, 3, 6, -458750, 3, 6, -524286, 3, 6, -589822, 3, 6, -655358, 3, 6, -720894, 262147, 6, -720895, 65539, 7, -720896, 65539, 7, -655361, 65539, 7, -655362, 65539, 7, -655363, 196611, 7, -720899, 131075, 6, -786435, 131075, 6, -851971, 131075, 6, -917507, 131075, 6, -983043, 131075, 6, -1048579, 131075, 6, -1114115, 131075, 6, -1179651, 131075, 6, -1245187, 131075, 6, -1310723, 131075, 6, -1376259, 131075, 6, -1441795, 131075, 6, -1507331, 131075, 6, -196607, 65539, 7, -196608, 65539, 7, -131073, 65539, 7, -131074, 65539, 7, -131075, 65539, 7, -131076, 65539, 7, -131077, 65539, 7, -131078, 65539, 7, -131079, 65539, 7, -131080, 65539, 7, -131081, 65539, 7, -131082, 65539, 7, -131083, 65539, 7, -131084, 65539, 7, -131085, 65539, 7, -131086, 65539, 7, -131087, 65539, 7, -131088, 65539, 7, -131089, 65539, 7, -131090, 65539, 7, -131091, 65539, 7, -131092, 65539, 7, -524309, 131075, 5, -524310, 65539, 5, -524311, 65539, 5, -524312, 65539, 5, -524313, 65539, 5, -524314, 65539, 5, -524315, 65539, 5, -524316, 65539, 5, -524317, 3, 7, -589853, 3, 6, -655389, 3, 6, -720925, 3, 6, -786461, 3, 6, -851997, 3, 6, -917533, 3, 6, -983069, 3, 6, -1048605, 3, 6, -1114141, 3, 6, -1179677, 3, 6, -1245213, 3, 6, -1310749, 3, 6, -1376285, 3, 6, -1441821, 3, 6, -1507357, 3, 6, -1572893, 3, 5, -1572892, 65539, 5, -1572891, 65539, 5, -1572890, 65539, 5, -1572889, 65539, 5, -1572888, 65539, 5, -1572887, 65539, 5, -1572886, 65539, 5, -1572885, 65539, 5, -1572884, 65539, 5, -1572883, 65539, 5, -1572882, 65539, 5, -1572881, 65539, 5, -1572880, 65539, 5, -1572879, 65539, 5, -1572878, 65539, 5, -1572877, 65539, 5, -1572876, 65539, 5, -1572875, 65539, 5, -1572874, 65539, 5, -1572873, 65539, 5, -1572872, 65539, 5, -1572871, 65539, 5, -1572870, 65539, 5, -1572869, 65539, 5, -1572868, 65539, 5, -1572867, 131075, 5)
 
-[node name="transition" parent="." instance=ExtResource("5_h16p4")]
+[node name="transition" parent="." instance=ExtResource("8_4my0f")]
 
-[node name="Jorge" parent="." instance=ExtResource("8_e31gd")]
+[node name="Jorge" parent="." instance=ExtResource("9_v5qxn")]
+z_index = 1
 position = Vector2(70, -406)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_rveqp")
-script = ExtResource("11_cswiy")
+stream = ExtResource("10_11jdh")
+script = ExtResource("11_aakxm")
 inimigosmax = 30
 
-[node name="explosion" parent="." groups=["explosivo"] instance=ExtResource("12_xti3x")]
+[node name="explosion" parent="." groups=["explosivo"] instance=ExtResource("12_8d0w4")]
 position = Vector2(-32, -329)
 
-[node name="explosion2" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion2" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(83, -329)
 
-[node name="explosion3" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion3" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(205, -336)
 
-[node name="explosion4" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion4" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(205, -240)
 
-[node name="explosion5" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion5" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(118, -237)
 
-[node name="explosion6" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion6" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(4, -236)
 
-[node name="explosion7" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion7" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(-92, -232)
 
-[node name="explosion8" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion8" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(-92, -284)
 
-[node name="explosion9" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion9" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(-86, -369)
 
-[node name="explosion10" parent="." instance=ExtResource("12_xti3x")]
+[node name="explosion10" parent="." instance=ExtResource("12_8d0w4")]
 position = Vector2(321, -368)
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-script = ExtResource("13_wax4u")
-
-[node name="TextureRect" type="ColorRect" parent="CanvasLayer2"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -6.0
-offset_right = 6.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
-root_node = NodePath("../../transition")
-libraries = {
-"": SubResource("AnimationLibrary_nlk7k")
-}
-autoplay = "nada"
 
 [connection signal="animation_finished" from="CanvasLayer/Control2/AnimationPlayer" to="AudioStreamPlayer2D" method="_on_animation_player_animation_finished"]
 [connection signal="morreu" from="Jorge" to="AudioStreamPlayer2D" method="_on_jorge_morreu"]
-[connection signal="permadeath" from="Jorge" to="caboom" method="_on_jorge_permadeath"]
-[connection signal="permadeath" from="Jorge" to="CanvasLayer2" method="_on_jorge_permadeath"]
-[connection signal="animation_finished" from="CanvasLayer2/AnimationPlayer" to="CanvasLayer2" method="_on_animation_player_animation_finished"]
 
 [editable path="CanvasLayer/Control2"]

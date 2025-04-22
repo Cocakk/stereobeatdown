@@ -168,4 +168,11 @@ stream = ExtResource("13_ku2ok")
 script = ExtResource("14_vrdft")
 inimigosmax = 26
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(125, -48)
+color = Color(0, 0.470588, 0.388235, 1)
+energy = 18.01
+shadow_enabled = true
+shadow_color = Color(0, 0, 0.827451, 0.780392)
+
 [editable path="CanvasLayer/cutscene"]

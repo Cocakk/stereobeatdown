@@ -26,7 +26,7 @@ func contagemdeinimigos():
 		combat.play()
 	if inimigosmortos >= inimigos and portafechada.visible == true:
 		portafechada.visible = false
-		portaabrida.visible == true
+		portaabrida.visible = true
 		
 
 func _on_area_2d_body_entered(body):

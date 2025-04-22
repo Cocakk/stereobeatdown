@@ -12,6 +12,8 @@ signal door
 func _ready():
 	Morte.connect("morreu", Callable(self, "contagemdeinimigos"))
 	randomize()
+	
+
 
 func contagemdeinimigos():
 	randomize()
@@ -49,3 +51,5 @@ func spawn_inimigo():
 	novo_inimigo.connect("morreu", Callable(playermanager, "_on_enemy_died"))
 	novo_inimigo.connect("dano", Callable(playermanager, "_on_enemy_attack"))
 	animate.play("default")
+
+
