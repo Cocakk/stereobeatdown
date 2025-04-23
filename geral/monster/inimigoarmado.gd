@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var ray_cast_2d = $RayCast2D
 @onready var bullet_scene = preload("res://geral/bullet/bullet.tscn")  # Certifique-se de colocar o caminho correto
 @onready var weapon_point = $weaponpoint
+@onready var sangue = preload("res://sangue.tscn")
 
 signal morreu
 signal dano
@@ -36,6 +37,7 @@ var position_update_cooldown = 0.5  # Tempo entre atualizações de posição
 var update_timer = 0.0
 
 func _ready():
+	z_index = 1
 	nav_agent.avoidance_enabled = false
 	set_direction(face_left)
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
@@ -140,6 +142,7 @@ func _on_prox_body_exited(body):
 
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
+		
 		queue_free()
 	elif anini.animation == "damage":
 		if player_in_range:
@@ -180,6 +183,10 @@ func _on_hit_box_damaged(damage):
 	if state != STATES.DYING and !playermorto:
 		state = STATES.DYING
 		anini.play("Death")
+		var sangue_instance = sangue.instantiate()
+		get_tree().current_scene.add_child(sangue_instance)
+		sangue_instance.global_position = global_position
+		sangue_instance.z_index = 0
 		print("dano recebido 1234")
 		Morte.emit_signal("morreu")
 		emit_signal("morreu")

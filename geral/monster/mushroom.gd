@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var detectionshape = $Area2D/CollisionShape2D
 @onready var timer_2 = $Timer2
 @export var attention = true
-
+var sangue = preload("res://sangue.tscn")
 signal morreu
 signal dano
 
@@ -26,6 +26,7 @@ var can_detect_player = false  # Nova variável para controlar a detecção do j
 
 ### Funções de Inicialização
 func _ready():
+	z_index = 1
 	nav_agent.avoidance_enabled = false
 	set_direction(face_left)
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
@@ -113,6 +114,7 @@ func _on_prox_body_exited(body):
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
 		print("ain")
+
 		queue_free()
 	elif anini.animation == "damage":
 		if player_in_range:
@@ -148,6 +150,11 @@ func _on_hit_box_damaged(damage):
 	if state != "dying" and !playermorto:
 		damagetaken += 1
 		print(damagetaken)
+		var sangue_instance = sangue.instantiate()
+		get_tree().current_scene.add_child(sangue_instance)
+		sangue_instance.global_position = global_position
+		sangue_instance.z_index = 0
+
 		Morte.emit_signal("morreu")
 		emit_signal("morreu")
 		state = "dying"
