@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://5qbycj1a1wbf"]
+[gd_scene load_steps=48 format=3 uid="uid://5qbycj1a1wbf"]
 
 [ext_resource type="Script" path="res://geral/monster/jorge.gd" id="1_pmnva"]
 [ext_resource type="Texture2D" uid="uid://dwjtexr65m641" path="res://geral/monster/Desenho 18 (3) (1).png" id="2_s4454"]
@@ -89,9 +89,9 @@ region = Rect2(240, 0, 80, 64)
 atlas = ExtResource("4_7o0g2")
 region = Rect2(320, 0, 80, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hmbsv"]
-atlas = ExtResource("3_tr787")
-region = Rect2(0, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xheqv"]
+atlas = ExtResource("2_s4454")
+region = Rect2(192, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jjvor"]
 atlas = ExtResource("2_s4454")
@@ -152,6 +152,10 @@ region = Rect2(320, 64, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dds4s"]
 atlas = ExtResource("3_tr787")
 region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmbsv"]
+atlas = ExtResource("3_tr787")
+region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m03vw"]
 animations = [{
@@ -238,7 +242,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hmbsv")
+"texture": SubResource("AtlasTexture_xheqv")
 }],
 "loop": true,
 "name": &"idle",
@@ -307,6 +311,14 @@ animations = [{
 "loop": false,
 "name": &"transition",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmbsv")
+}],
+"loop": true,
+"name": &"wait",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r6pmf"]
@@ -336,10 +348,8 @@ shape = SubResource("CircleShape2D_q8gub")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m03vw")
-animation = &"Death"
-autoplay = "idle"
-frame = 11
-frame_progress = 1.0
+animation = &"idle"
+autoplay = "wait"
 
 [node name="HitBox" parent="." instance=ExtResource("5_jv6sr")]
 visible = false

@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	if not attention and not can_detect_player and state != STATES.TRANSITION:
 		state = STATES.IDLE
 		velocity = Vector2.ZERO
-		anini.play("idle")
+		anini.play("wait")
 		return
 
 	if podebate and state != STATES.DYING and state != STATES.ATTACK and !attackcooldown:
@@ -159,7 +159,7 @@ func _on_prox_body_exited(body):
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
 		emit_signal("permadeath")
-		anini.pause()
+		anini.stop()
 		
 	elif anini.animation == "damage":
 		if player_in_range:
@@ -208,7 +208,7 @@ func _on_any_enemy_died():
 
 func _on_hit_box_damaged(damage):
 	if state != STATES.DYING and !playermorto:
-		if danorecebido >= 3:
+		if danorecebido >= 20:
 			state = STATES.DYING
 			anini.play("Death")
 			shoot_timer.stop()

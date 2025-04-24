@@ -16,6 +16,12 @@ func contagemdeinimigos():
 	if inimigosmax <= inimigos:
 		stop()
 
+func _unhandled_input(event):
+	if event.is_action_pressed("drink") and canplay:
+		play()
+		canplay = false
+	pass
+
 func _on_jorge_morreu():
 	if canplay == true:
 		play()

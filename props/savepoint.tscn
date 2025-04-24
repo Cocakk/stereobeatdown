@@ -53,6 +53,7 @@ one_way_collision_margin = 0.0
 debug_color = Color(0.647059, 0.513726, 0.227451, 0.419608)
 
 [node name="Label" type="Label" parent="."]
+z_index = 10
 offset_left = 14.0
 offset_top = -20.0
 offset_right = 114.0
