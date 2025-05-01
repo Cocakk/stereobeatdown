@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://ochy1jbklln7"]
+[gd_scene load_steps=31 format=3 uid="uid://ochy1jbklln7"]
 
 [ext_resource type="Texture2D" uid="uid://o5u5ldpebirs" path="res://geral/bullet/bulletdiagonal.png" id="1_1cdb1"]
 [ext_resource type="Script" path="res://geral/bullet/bullet.gd" id="1_5spmd"]
 [ext_resource type="Texture2D" uid="uid://5bmn1xk5wknp" path="res://geral/bullet/bulletlateral.png" id="2_su3cj"]
 [ext_resource type="Texture2D" uid="uid://bwuixce41yuin" path="res://geral/bullet/bulletvertical.png" id="3_rhm6l"]
+[ext_resource type="AudioStream" uid="uid://die7iqx4uvtth" path="res://sonoplastia/shoot-1-81135.mp3" id="5_2huqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f6gtg"]
 radius = 3.0
@@ -205,6 +206,12 @@ debug_color = Color(0.678431, 0.501961, 0.2, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_by50m")
 debug_color = Color(0.988235, 0, 0.309804, 0.419608)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2huqv")
+volume_db = -1.0
+autoplay = true
+max_distance = 500.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

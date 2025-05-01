@@ -7,10 +7,12 @@ var damage := 10
 var playerrange = false  
 var returning := false  
 signal Bala
+@onready var audio_stream_player_2d = $AudioStreamPlayer2D
 
 func _ready():
 	connect("Bala", get_tree().get_first_node_in_group("player").levotiro)
 	await get_tree().create_timer(2.0).timeout
+	audio_stream_player_2d.play()
 	queue_free()
 
 

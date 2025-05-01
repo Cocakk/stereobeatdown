@@ -7,7 +7,8 @@ var morto = false
 @onready var idle : State = $"../idle"
 @onready var attack : State = $"../Attack"
 @onready var drink = $"../Node"
-
+@export var walk_sound: AudioStream
+@onready var audio_stream_player_2d = $"../../Audio/AudioStreamPlayer2D"
 
 
 #o que acontece quando o player entra nesse estado?
@@ -23,12 +24,18 @@ func Exit() -> void:
 	
 func Process(_delta : float) -> State:
 	if player.direction==Vector2.ZERO and !morto:
+		if audio_stream_player_2d.playing:
+			audio_stream_player_2d.stop()
 		return idle
 	player.velocity = player.direction * move_speed
 	
 	if morto:
 		player.velocity = player.direction * move_speed * 0
+		audio_stream_player_2d.stop()
 	elif player._SetDirection():
+		if not audio_stream_player_2d.playing:
+			audio_stream_player_2d.stream = walk_sound
+			audio_stream_player_2d.play()
 		player._UpdateAnimation("walk")
 		
 	return null

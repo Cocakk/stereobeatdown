@@ -69,7 +69,6 @@ theme_override_font_sizes/normal_font_size = 31
 position = Vector2(482, -106)
 
 [node name="player" parent="." instance=ExtResource("5_r8svt")]
-z_index = 1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_5l545")
 position = Vector2(483, 9)
@@ -93,7 +92,6 @@ layer_3/tile_data = PackedInt32Array(-458773, 131075, 6, -393237, 131075, 6, -32
 [node name="transition" parent="." instance=ExtResource("8_4my0f")]
 
 [node name="Jorge" parent="." instance=ExtResource("9_v5qxn")]
-z_index = 1
 position = Vector2(70, -406)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://pastaplayer/scripts/state_idle.gd" id="4_10kn4"]
 [ext_resource type="Script" path="res://pastaplayer/scripts/state_walk.gd" id="5_vu3d5"]
 [ext_resource type="Script" path="res://pastaplayer/scripts/state_attack.gd" id="6_47ibh"]
-[ext_resource type="AudioStream" uid="uid://dfjltgf30rly3" path="res://pastaplayer/sound/SwordSwoosh.wav" id="8_seffx"]
 [ext_resource type="PackedScene" uid="uid://cptrrk13abf58" path="res://geral/hurtbox/hurt_box.tscn" id="9_6uggg"]
+[ext_resource type="AudioStream" uid="uid://ptvf7iydn8b5" path="res://sonoplastia/walking-on-concrete-ver-2-268513.mp3" id="9_gaeis"]
 [ext_resource type="Script" path="res://pastaplayer/scripts/PlayerInteractionHost.gd" id="9_ukgc4"]
 [ext_resource type="AudioStream" uid="uid://gom80fg8hkfo" path="res://pastaplayer/sound/sword-sound-2-36274.mp3" id="10_ggbjk"]
 [ext_resource type="Script" path="res://pastaplayer/drink.gd" id="11_khyib"]
@@ -595,10 +595,11 @@ script = ExtResource("4_10kn4")
 
 [node name="walk" type="Node" parent="StateMachine"]
 script = ExtResource("5_vu3d5")
+walk_sound = ExtResource("9_gaeis")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_47ibh")
-attack_sound = ExtResource("8_seffx")
+attack_sound = ExtResource("10_ggbjk")
 
 [node name="drink" type="Node" parent="StateMachine"]
 script = ExtResource("11_khyib")
