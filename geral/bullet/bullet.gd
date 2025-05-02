@@ -8,6 +8,7 @@ var playerrange = false
 var returning := false  
 signal Bala
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
+var volume = 0
 
 func _ready():
 	connect("Bala", get_tree().get_first_node_in_group("player").levotiro)
