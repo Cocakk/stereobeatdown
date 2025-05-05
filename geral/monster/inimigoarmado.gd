@@ -6,9 +6,9 @@ extends CharacterBody2D
 @onready var detection_area = $Area2D
 @onready var detectionshape = $Area2D/CollisionShape2D
 @onready var timer_2 = $Timer2
-@onready var shoot_timer = $ShootTimer  # Novo timer para atirar
+@onready var shoot_timer = $ShootTimer
 @onready var ray_cast_2d = $RayCast2D
-@onready var bullet_scene = preload("res://geral/bullet/bullet.tscn")  # Certifique-se de colocar o caminho correto
+@onready var bullet_scene = preload("res://geral/bullet/bullet.tscn")
 @onready var weapon_point = $weaponpoint
 @onready var sangue = preload("res://sangue.tscn")
 
@@ -22,6 +22,10 @@ var speed = 80
 var damagetaken = 0
 var last_direction_x = 0
 
+# Configurações de disparo
+var min_shoot_delay = 2.0
+var max_shoot_delay = 5.0
+
 enum STATES { IDLE, CHASE, ATTACK, DYING }
 var state : STATES = STATES.IDLE
 
@@ -29,11 +33,11 @@ var podebate = false
 var player_in_range = false
 var attackcooldown = false
 var can_detect_player = false
-var preferred_distance = 175  # Distância desejada do jogador
+var preferred_distance = 175
 
-var direction_tolerance = 0.7  # Margem para considerar mudança de direção
+var direction_tolerance = 0.7
 var last_player_position: Vector2 = Vector2.ZERO
-var position_update_cooldown = 0.5  # Tempo entre atualizações de posição
+var position_update_cooldown = 0.5
 var update_timer = 0.0
 
 func _ready():
@@ -43,13 +47,12 @@ func _ready():
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
 	add_to_group("inimigos")
 	Morte.connect("morreu", Callable(self, "_on_any_enemy_died"))
-
-	# Timer para atirar a cada 3 segundos
-	shoot_timer.wait_time = 1.0
+	
+	randomize()
+	shoot_timer.wait_time = randf_range(min_shoot_delay, max_shoot_delay)
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 	shoot_timer.start()
 
-	# Verifica se o jogador está configurado corretamente
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 
@@ -88,7 +91,6 @@ func chase_player(delta: float):
 			state = STATES.IDLE
 		return
 
-	# Atualiza o alvo periodicamente
 	update_timer += delta
 	if update_timer >= position_update_cooldown:
 		nav_agent.target_position = player.global_position
@@ -97,29 +99,25 @@ func chase_player(delta: float):
 	var distance_to_player = global_position.distance_to(player.global_position)
 	var player_direction = (player.global_position - global_position).normalized()
 
-	# Lógica de movimento suavizada
-	if distance_to_player < preferred_distance - 20:  # Margem de 20 pixels
+	if distance_to_player < preferred_distance - 20:
 		velocity = -player_direction * (speed * 0.5)
-	elif distance_to_player > preferred_distance + 20:  # Margem de 20 pixels
+	elif distance_to_player > preferred_distance + 20:
 		velocity = player_direction * speed
 	else:
-		velocity = Vector2.ZERO  # Para completamente quando na distância ideal
+		velocity = Vector2.ZERO
 
-	# Sistema de direção melhorado
 	var target_direction = sign(player.global_position.x - global_position.x)
-	var current_direction = sign(anini.scale.x)  # 1 para direita, -1 para esquerda
+	var current_direction = sign(anini.scale.x)
 	
 	if abs(target_direction - current_direction) > direction_tolerance:
 		set_direction(target_direction < 0)
 
-	# Animação baseada no movimento real
 	if velocity.length() > 10:
 		anini.play("run")
 	else:
 		anini.play("idle")
-		velocity = Vector2.ZERO  # Garante parada completa
+		velocity = Vector2.ZERO
 
-	# Aplica o movimento
 	move_and_slide()
 
 func _on_detection_area_body_entered(body):
@@ -142,7 +140,6 @@ func _on_prox_body_exited(body):
 
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
-		
 		queue_free()
 	elif anini.animation == "damage":
 		if player_in_range:
@@ -168,15 +165,13 @@ func _on_timer_2_timeout():
 func set_direction(is_left: bool):
 	anini.scale.x = -1 if is_left else 1
 	if is_left:
-		weapon_point.position.x = -abs(weapon_point.position.x) # Ajuste a posição X para a esquerda
+		weapon_point.position.x = -abs(weapon_point.position.x)
 	else:
-		weapon_point.position.x = abs(weapon_point.position.x) # Ajuste a posição X para a direita
-
+		weapon_point.position.x = abs(weapon_point.position.x)
 
 func _on_any_enemy_died():
 	attention = true
 	if player_in_range and state != STATES.DYING:
-		print("teste b b b b b bb b bb b ")
 		state = STATES.CHASE
 
 func _on_hit_box_damaged(damage):
@@ -187,7 +182,6 @@ func _on_hit_box_damaged(damage):
 		get_tree().current_scene.add_child(sangue_instance)
 		sangue_instance.global_position = global_position
 		sangue_instance.z_index = 0
-		print("dano recebido 1234")
 		Morte.emit_signal("morreu")
 		emit_signal("morreu")
 
@@ -199,26 +193,23 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 		velocity = velocity.lerp(safe_velocity, 0.1)
 
 func _on_shoot_timer_timeout():
-
 	if player and is_instance_valid(player) and state != STATES.DYING and attention:
-		# Atualize a direção do RayCast2D para apontar para o jogador
 		ray_cast_2d.target_position = player.global_position - ray_cast_2d.global_position
 		ray_cast_2d.force_raycast_update()
 
-		# Verifique se o RayCast2D está colidindo com o jogador
 		if ray_cast_2d.is_colliding() and ray_cast_2d.get_collider() == player:
 			anini.play("attacking")
 			var bullet = bullet_scene.instantiate()
 			bullet.global_position = weapon_point.global_position
 			var direction = (player.global_position - weapon_point.global_position).normalized()
 			bullet.set_direction(direction)
+			
+			# Redução de volume do tiro
+			if bullet.has_node("AudioStreamPlayer"):
+				bullet.get_node("AudioStreamPlayer").volume_db = -15
+			
 			get_tree().current_scene.add_child(bullet)
-
-func debug_info():
-	print(
-		"Estado: %s\nVelocidade: %s\nPlayer Válido: %s" % [
-			str(state),
-			str(velocity),
-			str(is_instance_valid(player))
-		]
-	)
+			
+			# Novo intervalo aleatório
+			shoot_timer.wait_time = randf_range(min_shoot_delay, max_shoot_delay)
+			shoot_timer.start()

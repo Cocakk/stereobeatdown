@@ -1,8 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://djia5aspjxyy7"]
+[gd_scene load_steps=17 format=3 uid="uid://djia5aspjxyy7"]
 
 [ext_resource type="Script" path="res://DungeonGenerator.gd" id="1_5r2ty"]
 [ext_resource type="Texture2D" uid="uid://birqs71thyysp" path="res://generatorpasta/Itch release tileset example sprites 01 2x.png" id="2_kfxah"]
 [ext_resource type="Texture2D" uid="uid://cmckwax2depl0" path="res://tilemaps/Super_Retro_World_Interior_pack_week42/atlas_32x.png" id="3_ojy08"]
+[ext_resource type="FontFile" uid="uid://qdfu3nujhlrw" path="res://fonts/Texto/textos/Jersey10-Regular.ttf" id="4_ufrbw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c68dq"]
+font = ExtResource("4_ufrbw")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_fe643"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -8136,7 +8140,20 @@ sources/1 = SubResource("TileSetAtlasSource_gsm2c")
 sources/4 = SubResource("TileSetAtlasSource_4yld8")
 
 [node name="DungeonGenerator" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_5r2ty")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 45
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: "
+label_settings = SubResource("LabelSettings_c68dq")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_6pbs5")

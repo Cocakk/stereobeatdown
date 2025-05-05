@@ -20,6 +20,7 @@ signal pericles
 	
 	
 func _ready():
+	z_index = 1
 	state_machine.initialize(self)
 	add_to_group("player")
 	
@@ -41,7 +42,8 @@ func _process(_delta):
 	).normalized()
 
 func _physics_process(_delta):
-	move_and_slide()
+	move_and_slide() 
+
 
 func _SetDirection() -> bool:
 	if morto != true:
