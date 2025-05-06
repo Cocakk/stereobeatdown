@@ -17,14 +17,14 @@ signal dano
 
 @export var attention = false
 var playermorto = false
-var speed = 80
+@export var speed = 80
 @export var player : Node2D
 var damagetaken = 0
 var last_direction_x = 0
 
 # Configurações de disparo
 var min_shoot_delay = 2.0
-var max_shoot_delay = 5.0
+var max_shoot_delay = 3.5
 
 enum STATES { IDLE, CHASE, ATTACK, DYING }
 var state : STATES = STATES.IDLE

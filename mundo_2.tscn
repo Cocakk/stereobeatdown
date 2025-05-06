@@ -159,7 +159,7 @@ visible = false
 
 [node name="portal" parent="." instance=ExtResource("8_jt2d5")]
 position = Vector2(155, -1010)
-next_scene = "res://mundo_3.tscn"
+next_scene = "res://mundo_4.tscn"
 inimigos = 26
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

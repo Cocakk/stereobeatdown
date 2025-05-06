@@ -1,10 +1,39 @@
 extends Node2D
-@onready var tilemap = $TileMap
 
+@onready var tilemap = $TileMap
+@onready var canvas_layer = $CanvasLayer
+@onready var label = $CanvasLayer/Label
+@onready var music_player = $CanvasLayer/AudioStreamPlayer
+
+var musicas = [
+	preload("res://musicasdedungeon/8-bit-game-158815.mp3"),
+	preload("res://musicasdedungeon/borboleta-neon-164517.mp3"),
+	preload("res://musicasdedungeon/eles-estao-te-observando-181870.mp3"),
+	preload("res://musicasdedungeon/espiritos-do-desespero-195665 (1).mp3"),
+	preload("res://musicasdedungeon/um-vulto-no-beco-escuro-190396 (1).mp3")
+]
+
+var key = "beterruba"
 var grid_size := Vector2i(50, 50)
-var max_rooms := 10
 var grid = []
 var rooms = []
+
+# Progressão e placar
+var nivel_dungeon := 0
+var rooms_vencidas := 0
+var high_score := 0
+
+# Parâmetros de dificuldade
+var min_rooms := 3
+var max_rooms := 4
+var inimigos_base_por_sala := 2
+
+# Limite de inimigos ativos
+var limite := 8 # Ajuste conforme desejado
+
+# Flags de controle
+var pode_avancar := true
+var portal_ativo := false
 
 # Tipos de tiles no grid
 const TILE_VAZIO = 0
@@ -32,27 +61,56 @@ var inimigo1_scene := preload("res://geral/monster/mushroom.tscn")
 var inimigo2_scene := preload("res://geral/monster/mafia.tscn")
 var player = null
 
-# Progressão de dungeon
-var nivel_dungeon := 0
+# Controle de inimigos
 var enemy_spawn_points = []
 var enemies_alive := 0
-var limite := 26 # Limite total de inimigos mortos antes de emitir o sinal de porta
+var enemies_queue = [] # fila de inimigos a serem instanciados
+
 signal door
 
 func _ready():
 	randomize()
+	tocar_musica_aleatoria()
+	carregar_high_score()
 	gerar_nivel()
+	var config = ConfigFile.new()
+	config.set_value("Scenes", "Name", get_tree().current_scene.scene_file_path)
+	config.save_encrypted_pass("user://scenes.cfg", key)
+	music_player.connect("finished", Callable(self, "_on_music_finished"))
+
+func tocar_musica_aleatoria():
+	var idx = randi_range(0, musicas.size() - 1)
+	music_player.stream = musicas[idx]
+	music_player.play()
+
+func _on_music_finished():
+	tocar_musica_aleatoria()
 
 func gerar_nivel():
+	pode_avancar = true
+	portal_ativo = false
 	nivel_dungeon += 1
-	# Limpa tudo
+	rooms_vencidas = nivel_dungeon - 1
+	if rooms_vencidas > high_score:
+		high_score = rooms_vencidas
+		salvar_high_score()
+	label.text = "Rooms vencidas: %d\nHigh Score: %d" % [rooms_vencidas, high_score]
+
+	# Progressão de dificuldade (sempre inteiros!)
+	min_rooms = max(3, 2 + int(nivel_dungeon * 0.3)) # Sempre pelo menos 3 salas!
+	max_rooms = 4 + int(nivel_dungeon * 0.5)
+	inimigos_base_por_sala = 2 + int(nivel_dungeon * 0.5)
+	limite = 6 + int(nivel_dungeon * 0.4)
+
+	# Limpa tudo, exceto tilemap e UI
 	for child in get_children():
-		if child != tilemap:
+		if child != tilemap and child != canvas_layer:
 			child.queue_free()
 	grid.clear()
 	rooms.clear()
 	enemy_spawn_points.clear()
 	enemies_alive = 0
+	enemies_queue.clear()
 
 	initialize_grid()
 	generate_rooms()
@@ -61,7 +119,19 @@ func gerar_nivel():
 	colocar_spawns()
 	desenhar_no_tilemap()
 	adicionar_player()
-	spawn_inimigos()
+	inicializar_fila_inimigos()
+	spawn_inimigos_do_limite()
+
+func salvar_high_score():
+	var file = FileAccess.open("user://highscore.save", FileAccess.WRITE)
+	file.store_32(high_score)
+	file = null
+
+func carregar_high_score():
+	if FileAccess.file_exists("user://highscore.save"):
+		var file = FileAccess.open("user://highscore.save", FileAccess.READ)
+		high_score = file.get_32()
+		file = null
 
 func initialize_grid():
 	grid = []
@@ -99,16 +169,30 @@ func carve_vertical_tunnel(y1, y2, x):
 
 func generate_rooms():
 	rooms.clear()
-	for i in range(max_rooms):
-		var w = randi_range(10, 20)
-		var h = randi_range(10, 20)
+	var tentativas = 0
+	while rooms.size() < min_rooms or (rooms.size() < max_rooms and tentativas < max_rooms * 3):
+		var w = randi_range(10, 16)
+		var h = randi_range(10, 16)
 		var pos = Vector2i(randi_range(2, grid_size.x - w - 3), randi_range(2, grid_size.y - h - 3))
 		if not check_collision(pos, w, h):
 			carve_room(pos, w, h)
 			rooms.append({"pos": pos, "size": Vector2i(w, h)})
+		tentativas += 1
 
 func connect_rooms():
-	for i in range(1, rooms.size()):
+	if rooms.size() < 2:
+		return
+	# Sempre conecta as duas primeiras salas com pelo menos um corredor
+	var first_center = rooms[0].pos + rooms[0].size / 2
+	var second_center = rooms[1].pos + rooms[1].size / 2
+	if randi() % 2 == 0:
+		carve_horizontal_tunnel(int(first_center.x), int(second_center.x), int(first_center.y))
+		carve_vertical_tunnel(int(first_center.y), int(second_center.y), int(second_center.x))
+	else:
+		carve_vertical_tunnel(int(first_center.y), int(second_center.y), int(first_center.x))
+		carve_horizontal_tunnel(int(first_center.x), int(second_center.x), int(second_center.y))
+	# Conecta as demais salas normalmente
+	for i in range(2, rooms.size()):
 		var prev_center = rooms[i-1].pos + rooms[i-1].size / 2
 		var curr_center = rooms[i].pos + rooms[i].size / 2
 		carve_horizontal_tunnel(int(prev_center.x), int(curr_center.x), int(prev_center.y))
@@ -158,41 +242,35 @@ func colocar_spawns():
 		else:
 			salas_para_inimigos.append(room_tiles)
 
-	# Progressão de inimigos por dungeon
-	if nivel_dungeon == 1:
-		# Só uma sala de inimigos: 4 mushrooms
-		if salas_para_inimigos.size() > 0:
-			var tiles = salas_para_inimigos[0]
-			for j in range(min(4, tiles.size())):
-				var enemy_tile = tiles[j]
-				grid[enemy_tile.y][enemy_tile.x] = TILE_ENEMY_SPAWN
-				enemy_spawn_points.append({"pos": enemy_tile, "tipo": "mushroom"})
-	elif nivel_dungeon == 2:
-		# Uma sala: 2 mushrooms, 2 mafias
-		if salas_para_inimigos.size() > 0:
-			var tiles = salas_para_inimigos[0]
-			for j in range(min(2, tiles.size())):
-				var enemy_tile = tiles[j]
-				grid[enemy_tile.y][enemy_tile.x] = TILE_ENEMY_SPAWN
-				enemy_spawn_points.append({"pos": enemy_tile, "tipo": "mushroom"})
-			for j in range(2, min(4, tiles.size())):
-				var enemy_tile = tiles[j]
-				grid[enemy_tile.y][enemy_tile.x] = TILE_ENEMY_SPAWN
-				enemy_spawn_points.append({"pos": enemy_tile, "tipo": "mafia"})
-	elif nivel_dungeon >= 3:
-		# Duas salas: uma só mafias, outra só mushrooms
-		if salas_para_inimigos.size() > 0:
-			var tiles = salas_para_inimigos[0]
-			for j in range(min(4, tiles.size())):
-				var enemy_tile = tiles[j]
-				grid[enemy_tile.y][enemy_tile.x] = TILE_ENEMY_SPAWN
-				enemy_spawn_points.append({"pos": enemy_tile, "tipo": "mafia"})
-		if salas_para_inimigos.size() > 1:
-			var tiles = salas_para_inimigos[1]
-			for j in range(min(4, tiles.size())):
-				var enemy_tile = tiles[j]
-				grid[enemy_tile.y][enemy_tile.x] = TILE_ENEMY_SPAWN
-				enemy_spawn_points.append({"pos": enemy_tile, "tipo": "mushroom"})
+	# Progressão: mais "mafia" conforme o nível
+	var mafia_ratio = clamp(0.2 + float(nivel_dungeon) * 0.08, 0.2, 0.9)
+	for idx in range(salas_para_inimigos.size()):
+		var tiles = salas_para_inimigos[idx]
+		var qtd_inimigos = min(inimigos_base_por_sala + int(nivel_dungeon * 0.5), tiles.size())
+		for j in range(qtd_inimigos):
+			var enemy_tile = tiles[j]
+			grid[enemy_tile.y][enemy_tile.x] = TILE_ENEMY_SPAWN
+			var tipo = "mafia" if randf() < mafia_ratio else "mushroom"
+			enemy_spawn_points.append({"pos": enemy_tile, "tipo": tipo})
+
+func inicializar_fila_inimigos():
+	enemies_queue.clear()
+	for enemy_info in enemy_spawn_points:
+		enemies_queue.append(enemy_info)
+
+func spawn_inimigos_do_limite():
+	while enemies_alive < limite and enemies_queue.size() > 0:
+		var enemy_info = enemies_queue.pop_front()
+		var inimigo
+		if enemy_info["tipo"] == "mushroom":
+			inimigo = inimigo1_scene.instantiate()
+		else:
+			inimigo = inimigo2_scene.instantiate()
+		inimigo.position = tilemap.map_to_local(enemy_info["pos"])
+		inimigo.player = player
+		inimigo.connect("morreu", Callable(self, "_on_enemy_died"))
+		add_child(inimigo)
+		enemies_alive += 1
 
 func desenhar_no_tilemap():
 	tilemap.clear()
@@ -230,32 +308,20 @@ func adicionar_player():
 				add_child(player)
 				return
 
-func spawn_inimigos():
-	enemies_alive = 0
-	for enemy_info in enemy_spawn_points:
-		var inimigo
-		if enemy_info["tipo"] == "mushroom":
-			inimigo = inimigo1_scene.instantiate()
-		else:
-			inimigo = inimigo2_scene.instantiate()
-		inimigo.position = tilemap.map_to_local(enemy_info["pos"])
-		inimigo.player = player # Referência ao player
-		inimigo.connect("morreu", Callable(self, "_on_enemy_died"))
-		add_child(inimigo)
-		enemies_alive += 1
-
 func _on_enemy_died():
 	enemies_alive -= 1
-	limite -= 1
-	if enemies_alive <= 0 and limite > 0:
-		# Todos mortos, mas ainda não atingiu o limite, pode gerar novo nível ou abrir porta
-		pass # Você pode colocar lógica extra aqui se quiser
-	elif limite <= 0:
-		emit_signal("door")
+	if enemies_queue.size() > 0:
+		spawn_inimigos_do_limite()
+	elif enemies_alive == 0:
+		portal_ativo = true # Agora o portal pode ser usado
 
 func _process(_delta):
 	if player:
 		var player_pos = tilemap.local_to_map(player.position)
 		if player_pos.x >= 0 and player_pos.x < grid_size.x and player_pos.y >= 0 and player_pos.y < grid_size.y:
-			if grid[player_pos.y][player_pos.x] == TILE_NOVO_NIVEL:
-				gerar_nivel()
+			if grid[player_pos.y][player_pos.x] == TILE_NOVO_NIVEL and portal_ativo:
+				if pode_avancar:
+					pode_avancar = false
+					gerar_nivel()
+			elif grid[player_pos.y][player_pos.x] != TILE_NOVO_NIVEL:
+				pode_avancar = true
