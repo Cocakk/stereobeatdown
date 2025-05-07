@@ -1,7 +1,7 @@
 
 extends CharacterBody2D
 @onready var timer = $Timer
-
+@export var hp = 20
 @export var face_left: bool = true
 @onready var anini = $AnimatedSprite2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 			set_direction(target_direction < 0)
 		STATES.DYING:
 			velocity = Vector2.ZERO
-			anini.play("Death")
+
 		STATES.TRANSITION:
 			print("dor de cabeça")
 			velocity = Vector2.ZERO
@@ -159,7 +159,7 @@ func _on_prox_body_exited(body):
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
 		emit_signal("permadeath")
-		anini.stop()
+		anini.play("dead")
 		
 	elif anini.animation == "damage":
 		if player_in_range:
@@ -208,7 +208,7 @@ func _on_any_enemy_died():
 
 func _on_hit_box_damaged(damage):
 	if state != STATES.DYING and !playermorto:
-		if danorecebido >= 20:
+		if danorecebido >= hp:
 			state = STATES.DYING
 			anini.play("Death")
 			shoot_timer.stop()

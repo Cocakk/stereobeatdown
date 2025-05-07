@@ -12,10 +12,9 @@ var sangue = preload("res://sangue.tscn")
 signal morreu
 signal dano
 
-
 var playermorto = false
 
-@export var speed = 120
+@export var speed = 120 # Valor padrão, mas será sobrescrito no _ready()
 @export var player : Node2D
 var damagetaken = 0
 var state = "idle"
@@ -30,6 +29,9 @@ func _ready():
 	nav_agent.avoidance_enabled = false
 	set_direction(face_left)
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
+	
+	# Definindo velocidade aleatória entre 80 e 120
+	speed = randi_range(80, 120)
 	
 	# Conectar o sinal "morreu" do grupo "inimigos"
 	add_to_group("inimigos")
@@ -96,11 +98,11 @@ func _on_detection_area_body_entered(body):
 		player_in_range = true
 		if attention and state != "dying":
 			state = "chase"
+
 func notify_enemy_death():
 	Morte.emit_signal("morreu")
+
 ### Funções de Eventos
-
-
 func _on_prox_body_entered(body):
 	if body == player:  # Verifica se é o jogador
 		podebate = true  # Ativa a permissão para atacar
@@ -114,7 +116,6 @@ func _on_prox_body_exited(body):
 func _on_animated_sprite_2d_animation_finished():
 	if anini.animation == "Death":
 		print("ain")
-
 		queue_free()
 	elif anini.animation == "damage":
 		if player_in_range:
@@ -144,7 +145,6 @@ func _on_timer_2_timeout():
 func set_direction(is_left: bool):
 	anini.scale.x = 1 if is_left else -1
 
-
 ## Quando o bucha do inimigo leva dano
 func _on_hit_box_damaged(damage):
 	if state != "dying" and !playermorto:
@@ -164,9 +164,6 @@ func _on_hit_box_damaged(damage):
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2):
 	velocity = safe_velocity
 
-
-
-	
 func _on_any_enemy_died():
 	attention = true
 	print("teste a  a a a  a a a a ")

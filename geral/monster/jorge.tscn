@@ -242,6 +242,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_w7okn")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xheqv")
 }],
 "loop": true,
@@ -339,6 +347,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 platform_floor_layers = 4294967279
 script = ExtResource("1_pmnva")
+hp = 8
 attention = false
 
 [node name="colisao" type="CollisionShape2D" parent="."]
@@ -348,7 +357,7 @@ shape = SubResource("CircleShape2D_q8gub")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m03vw")
-animation = &"idle"
+animation = &"dead"
 autoplay = "wait"
 
 [node name="HitBox" parent="." instance=ExtResource("5_jv6sr")]
