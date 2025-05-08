@@ -34,5 +34,6 @@ func _on_animation_player_animation_finished(anim_name):
 		animation_player.play("polciafinal")
 	elif anim_name == "polciafinal":
 		animation_player.play("kent_final")
-		
+	elif anim_name == "kent_final":
+		get_tree().change_scene_to_file("res://generatorpasta/dungeon_generator.tscn")
 	pass # Replace with function body.

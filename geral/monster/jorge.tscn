@@ -347,7 +347,6 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 platform_floor_layers = 4294967279
 script = ExtResource("1_pmnva")
-hp = 8
 attention = false
 
 [node name="colisao" type="CollisionShape2D" parent="."]
